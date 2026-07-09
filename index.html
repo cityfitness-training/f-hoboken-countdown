@@ -557,8 +557,9 @@ function render(stats){
     statusEl.className = "val behind";
   }
 
+  const lastUpdatedText = stats["Last Updated"];
   document.getElementById("lastUpdated").textContent =
-    "Stats as of last update — " + now.toLocaleDateString("en-US", {month:"short", day:"numeric"});
+    lastUpdatedText ? ("Stats as of " + lastUpdatedText) : "Stats as of last update";
 }
 
 // Load stats.js fresh every time, bypassing any cached copy,
