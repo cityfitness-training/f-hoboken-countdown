@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>City Fitness Hoboken | Founding Member Countdown</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,400&display=swap" rel="stylesheet">
+<style>
+  /* ============================================================
+     This page reads its numbers from stats.js (a separate small
+     file sitting next to this one). To update the numbers,
+     edit stats.js — never edit this file.
+     ============================================================ */
+
+  :root{
+    --ink:#231F20;
+    --slate:#414042;
+    --copper-deep:#AE7C58;
+    --copper-light:#F3BE87;
+    --tan:#E4C7AA;
+    --cream:#FFF9F6;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Lato',sans-serif;
+    -webkit-font-smoothing:antialiased;
+    min-height:100vh;
+  }
+
+  .wrap{max-width:1000px;margin:0 auto;padding:0 24px 80px;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    background:var(--ink);
+    color:var(--cream);
+    padding:56px 24px 64px;
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(135deg, rgba(174,124,88,0.18), transparent 55%);
+    pointer-events:none;
+  }
+  .eyebrow{
+    font-size:13px;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    font-weight:700;
+    color:var(--copper-light);
+    margin:0 0 14px;
+  }
+  .hero h1{
+    font-size:clamp(28px,5vw,44px);
+    font-weight:900;
+    margin:0 0 6px;
+    letter-spacing:-0.01em;
+  }
+  .hero .sub{
+    font-size:16px;
+    color:var(--tan);
+    font-weight:400;
+    margin:0;
+  }
+
+  .bignum-row{
+    display:flex;
+    justify-content:center;
+    align-items:baseline;
+    gap:10px;
+    margin:36px 0 4px;
+    flex-wrap:wrap;
+  }
+  .bignum{
+    font-size:clamp(56px,12vw,108px);
+    font-weight:900;
+    line-height:1;
+    background:linear-gradient(135deg, var(--copper-light), var(--copper-deep));
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+  .bignum-of{
+    font-size:clamp(24px,4vw,34px);
+    font-weight:700;
+    color:var(--tan);
+  }
+  .bignum-label{
+    font-size:14px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--tan);
+    font-weight:700;
+    margin-top:4px;
+  }
+
+  .stat-strip{
+    display:flex;
+    justify-content:center;
+    gap:48px;
+    margin-top:36px;
+    flex-wrap:wrap;
+  }
+  .stat{
+    text-align:center;
+  }
+  .stat .val{
+    font-size:28px;
+    font-weight:900;
+    color:var(--copper-light);
+  }
+  .stat .lbl{
+    font-size:11px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--tan);
+    font-weight:700;
+    margin-top:2px;
+  }
+
+  /* ---------- MAIN GAUGE (overall) ---------- */
+  .section{
+    padding:48px 0 8px;
+  }
+  .section-title{
+    font-size:12px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    font-weight:700;
+    color:var(--slate);
+    margin:0 0 18px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .section-title::after{
+    content:"";
+    flex:1;
+    height:1px;
+    background:var(--tan);
+  }
+
+  .gauge-block{margin-bottom:8px;}
+  .gauge-caption{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    margin-bottom:10px;
+    font-weight:700;
+  }
+  .gauge-caption .name{font-size:16px;color:var(--ink);}
+  .gauge-caption .pct{font-size:15px;color:var(--copper-deep);}
+
+  .main-count{
+    font-size:40px;
+    font-weight:900;
+    color:var(--copper-deep);
+    margin:6px 0 18px;
+  }
+  .main-count span{
+    font-size:18px;
+    color:var(--slate);
+    font-weight:700;
+  }
+
+  svg.gauge{width:100%;display:block;overflow:visible;}
+  .track{fill:none;stroke:var(--tan);stroke-width:2;}
+  .fillbar{transition:width 1.1s cubic-bezier(.16,1,.3,1);}
+
+  /* ---------- MEMBERSHIP SPLIT ---------- */
+  .split-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:28px;
+    margin-top:8px;
+  }
+  @media (max-width:640px){
+    .split-grid{grid-template-columns:1fr;}
+  }
+  .split-card{
+    background:#fff;
+    border:1px solid var(--tan);
+    border-radius:14px;
+    padding:22px 20px 20px;
+  }
+  .split-card .name{
+    font-size:14px;
+    font-weight:700;
+    color:var(--ink);
+    margin-bottom:2px;
+  }
+  .split-card .count{
+    font-size:32px;
+    font-weight:900;
+    color:var(--copper-deep);
+    margin:2px 0 14px;
+  }
+  .split-card .count span{
+    font-size:15px;
+    color:var(--slate);
+    font-weight:700;
+  }
+
+  /* ---------- PACE / DEADLINE ---------- */
+  .pace-card{
+    background:#fff;
+    border:1px solid var(--tan);
+    border-radius:14px;
+    padding:26px 26px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:24px;
+    flex-wrap:wrap;
+    margin-top:4px;
+  }
+  .pace-item{text-align:center;flex:1;min-width:140px;}
+  .pace-item .val{font-size:30px;font-weight:900;color:var(--ink);}
+  .pace-item .val.good{color:#3f7d52;}
+  .pace-item .val.behind{color:#b0483f;}
+  .pace-item .lbl{
+    font-size:11px;letter-spacing:0.08em;text-transform:uppercase;
+    color:var(--slate);font-weight:700;margin-top:4px;
+  }
+  .pace-divider{width:1px;align-self:stretch;background:var(--tan);}
+  @media (max-width:640px){.pace-divider{display:none;}}
+
+  footer{
+    text-align:center;
+    font-size:12px;
+    color:var(--slate);
+    padding:36px 0 0;
+  }
+  footer a{color:var(--copper-deep);}
+
+  .updated-badge{
+    display:inline-block;
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:0.05em;
+    text-transform:uppercase;
+    color:var(--slate);
+    background:var(--tan);
+    padding:5px 12px;
+    border-radius:20px;
+    margin-top:14px;
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <p class="eyebrow">City Fitness · Hoboken Maxwell Place</p>
+  <h1>Founding Member Countdown</h1>
+
+  <div class="bignum-row">
+    <span class="bignum" id="fmCount">—</span>
+    <span class="bignum-of" id="fmGoal">/ 1,200</span>
+  </div>
+  <p class="bignum-label">Founding Members Secured</p>
+
+  <div class="stat-strip">
+    <div class="stat">
+      <div class="val" id="statConversion">—</div>
+      <div class="lbl">Lead Conversion</div>
+    </div>
+    <div class="stat">
+      <div class="val" id="statDays">—</div>
+      <div class="lbl">Days To Goal Date</div>
+    </div>
+    <div class="stat">
+      <div class="val" id="statLeads">—</div>
+      <div class="lbl">Total HBK Leads</div>
+    </div>
+  </div>
+
+  <div class="updated-badge" id="lastUpdated">Loading live data…</div>
+</div>
+
+<div class="wrap">
+
+  <div class="section">
+    <p class="section-title">Overall Progress</p>
+    <div class="gauge-block">
+      <div class="gauge-caption">
+        <span class="name">To 1,200 Founding Members</span>
+      </div>
+      <div class="main-count" id="mainCount">— <span id="mainPct"></span></div>
+      <svg class="gauge" viewBox="0 0 600 100" id="mainGauge">
+        <defs>
+          <linearGradient id="gradMain" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#F3BE87"/>
+            <stop offset="100%" stop-color="#AE7C58"/>
+          </linearGradient>
+          <clipPath id="clipMain">
+            <rect x="0" y="30" width="16" height="40" rx="2"/>
+            <rect x="20" y="19" width="12" height="62" rx="2"/>
+            <rect x="36" y="6" width="26" height="88" rx="3"/>
+            <rect x="62" y="42" width="476" height="16"/>
+            <rect x="538" y="6" width="26" height="88" rx="3"/>
+            <rect x="568" y="19" width="12" height="62" rx="2"/>
+            <rect x="584" y="30" width="16" height="40" rx="2"/>
+          </clipPath>
+        </defs>
+        <!-- track -->
+        <g class="track">
+          <rect x="0" y="30" width="16" height="40" rx="2"/>
+          <rect x="20" y="19" width="12" height="62" rx="2"/>
+          <rect x="36" y="6" width="26" height="88" rx="3"/>
+          <rect x="62" y="42" width="476" height="16"/>
+          <rect x="538" y="6" width="26" height="88" rx="3"/>
+          <rect x="568" y="19" width="12" height="62" rx="2"/>
+          <rect x="584" y="30" width="16" height="40" rx="2"/>
+        </g>
+        <!-- fill, clipped to dumbbell shape -->
+        <rect class="fillbar" id="mainFill" x="0" y="0" width="0" height="100" fill="url(#gradMain)" clip-path="url(#clipMain)"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="section">
+    <p class="section-title">Membership Type Split</p>
+    <div class="split-grid">
+
+      <div class="split-card">
+        <div class="name">Performance+</div>
+        <div class="count" id="pCount">— <span id="pPct"></span></div>
+        <svg class="gauge" viewBox="0 0 300 60" id="gaugeP">
+          <defs>
+            <clipPath id="clipP">
+              <rect x="0" y="18" width="10" height="24" rx="1"/>
+              <rect x="12" y="11" width="8" height="38" rx="1"/>
+              <rect x="22" y="4" width="16" height="52" rx="2"/>
+              <rect x="38" y="25" width="224" height="10"/>
+              <rect x="262" y="4" width="16" height="52" rx="2"/>
+              <rect x="280" y="11" width="8" height="38" rx="1"/>
+              <rect x="290" y="18" width="10" height="24" rx="1"/>
+            </clipPath>
+          </defs>
+          <g class="track">
+            <rect x="0" y="18" width="10" height="24" rx="1"/>
+            <rect x="12" y="11" width="8" height="38" rx="1"/>
+            <rect x="22" y="4" width="16" height="52" rx="2"/>
+            <rect x="38" y="25" width="224" height="10"/>
+            <rect x="262" y="4" width="16" height="52" rx="2"/>
+            <rect x="280" y="11" width="8" height="38" rx="1"/>
+            <rect x="290" y="18" width="10" height="24" rx="1"/>
+          </g>
+          <rect class="fillbar" id="fillP" x="0" y="0" width="0" height="60" fill="url(#gradMain)" clip-path="url(#clipP)"/>
+        </svg>
+      </div>
+
+      <div class="split-card">
+        <div class="name">Studio+</div>
+        <div class="count" id="sCount">— <span id="sPct"></span></div>
+        <svg class="gauge" viewBox="0 0 300 60" id="gaugeS">
+          <defs>
+            <clipPath id="clipS">
+              <rect x="0" y="18" width="10" height="24" rx="1"/>
+              <rect x="12" y="11" width="8" height="38" rx="1"/>
+              <rect x="22" y="4" width="16" height="52" rx="2"/>
+              <rect x="38" y="25" width="224" height="10"/>
+              <rect x="262" y="4" width="16" height="52" rx="2"/>
+              <rect x="280" y="11" width="8" height="38" rx="1"/>
+              <rect x="290" y="18" width="10" height="24" rx="1"/>
+            </clipPath>
+          </defs>
+          <g class="track">
+            <rect x="0" y="18" width="10" height="24" rx="1"/>
+            <rect x="12" y="11" width="8" height="38" rx="1"/>
+            <rect x="22" y="4" width="16" height="52" rx="2"/>
+            <rect x="38" y="25" width="224" height="10"/>
+            <rect x="262" y="4" width="16" height="52" rx="2"/>
+            <rect x="280" y="11" width="8" height="38" rx="1"/>
+            <rect x="290" y="18" width="10" height="24" rx="1"/>
+          </g>
+          <rect class="fillbar" id="fillS" x="0" y="0" width="0" height="60" fill="url(#gradMain)" clip-path="url(#clipS)"/>
+        </svg>
+      </div>
+
+      <div class="split-card">
+        <div class="name">Neighborhood</div>
+        <div class="count" id="nCount">— <span id="nPct"></span></div>
+        <svg class="gauge" viewBox="0 0 300 60" id="gaugeN">
+          <defs>
+            <clipPath id="clipN">
+              <rect x="0" y="18" width="10" height="24" rx="1"/>
+              <rect x="12" y="11" width="8" height="38" rx="1"/>
+              <rect x="22" y="4" width="16" height="52" rx="2"/>
+              <rect x="38" y="25" width="224" height="10"/>
+              <rect x="262" y="4" width="16" height="52" rx="2"/>
+              <rect x="280" y="11" width="8" height="38" rx="1"/>
+              <rect x="290" y="18" width="10" height="24" rx="1"/>
+            </clipPath>
+          </defs>
+          <g class="track">
+            <rect x="0" y="18" width="10" height="24" rx="1"/>
+            <rect x="12" y="11" width="8" height="38" rx="1"/>
+            <rect x="22" y="4" width="16" height="52" rx="2"/>
+            <rect x="38" y="25" width="224" height="10"/>
+            <rect x="262" y="4" width="16" height="52" rx="2"/>
+            <rect x="280" y="11" width="8" height="38" rx="1"/>
+            <rect x="290" y="18" width="10" height="24" rx="1"/>
+          </g>
+          <rect class="fillbar" id="fillN" x="0" y="0" width="0" height="60" fill="url(#gradMain)" clip-path="url(#clipN)"/>
+        </svg>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="section">
+    <p class="section-title">Pace Check</p>
+    <div class="pace-card">
+      <div class="pace-item">
+        <div class="val" id="paceNeeded">—</div>
+        <div class="lbl">Members Needed / Day</div>
+      </div>
+      <div class="pace-divider"></div>
+      <div class="pace-item">
+        <div class="val" id="paceActual">—</div>
+        <div class="lbl">Actual Pace So Far</div>
+      </div>
+      <div class="pace-divider"></div>
+      <div class="pace-item">
+        <div class="val" id="paceStatus">—</div>
+        <div class="lbl">On Track?</div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    Data refreshes automatically from the team's tracker. Refresh this page to see the latest count.
+  </footer>
+
+</div>
+
+<script src="stats.js"></script>
+<script>
+/* ============================================================
+   GOAL / DEADLINE — only change these if the campaign target
+   or end date itself changes. Day-to-day number updates happen
+   in stats.js, not here.
+
+   LIVE_URL — your Apps Script web app URL. If someone viewing
+   this page is signed into a cityfitness.com Google account,
+   the page will try to load live numbers from your Sheet.
+   If that fails (no CF Google login, or anything else goes
+   wrong), it automatically falls back to the numbers in stats.js.
+   ============================================================ */
+const GOAL = 1200;
+const DEADLINE = "2026-09-16T23:59:59";
+const CAMPAIGN_START = "2026-07-06T00:00:00"; // date founding member form opened
+const LIVE_URL = "https://script.google.com/a/macros/cityfitness.com/s/AKfycbxDC3QWXNll79rwm1sLKvdtjxXg3Cf5H0QFnL4n1NUZD2O6gsb3G39g_JJCOMWCxStiJw/exec";
+
+/* ============================================================
+   LOGIC — no need to edit below this line
+   ============================================================ */
+
+function fmtNum(n){ return Number(n).toLocaleString("en-US"); }
+
+function render(stats){
+  const fm = Number(stats["Founding Members"]) || 0;
+  const leads = Number(stats["Total HBK Leads"]) || 0;
+  const p = Number(stats["Performance+"]) || 0;
+  const s = Number(stats["Studio+"]) || 0;
+  const n = Number(stats["Neighborhood"]) || 0;
+
+  const pctOfGoal = Math.min(100, (fm / GOAL) * 100);
+  const conversion = leads > 0 ? (fm / leads) * 100 : 0;
+
+  document.getElementById("fmCount").textContent = fmtNum(fm);
+  document.getElementById("fmGoal").textContent = "/ " + fmtNum(GOAL);
+  document.getElementById("statConversion").textContent = conversion.toFixed(2) + "%";
+  document.getElementById("statLeads").textContent = fmtNum(leads);
+  document.getElementById("mainCount").innerHTML = fmtNum(fm) + " / " + fmtNum(GOAL) + " <span>(" + pctOfGoal.toFixed(0) + "%)</span>";
+
+  // main dumbbell fill: viewBox width 600
+  document.getElementById("mainFill").setAttribute("width", (pctOfGoal/100*600).toFixed(1));
+
+  // membership split
+  const total = p + s + n;
+  const pPct = total ? (p/total*100) : 0;
+  const sPct = total ? (s/total*100) : 0;
+  const nPct = total ? (n/total*100) : 0;
+
+  document.getElementById("pCount").innerHTML = fmtNum(p) + " <span>(" + pPct.toFixed(0) + "%)</span>";
+  document.getElementById("sCount").innerHTML = fmtNum(s) + " <span>(" + sPct.toFixed(0) + "%)</span>";
+  document.getElementById("nCount").innerHTML = fmtNum(n) + " <span>(" + nPct.toFixed(0) + "%)</span>";
+
+  document.getElementById("fillP").setAttribute("width", (pPct/100*300).toFixed(1));
+  document.getElementById("fillS").setAttribute("width", (sPct/100*300).toFixed(1));
+  document.getElementById("fillN").setAttribute("width", (nPct/100*300).toFixed(1));
+
+  // days remaining
+  const now = new Date();
+  const deadline = new Date(DEADLINE);
+  const start = new Date(CAMPAIGN_START);
+  const daysLeft = Math.max(0, Math.ceil((deadline - now) / 86400000));
+  const daysElapsed = Math.max(1, Math.ceil((now - start) / 86400000));
+  document.getElementById("statDays").textContent = daysLeft;
+
+  // pace
+  const remaining = Math.max(0, GOAL - fm);
+  const neededPerDay = daysLeft > 0 ? (remaining / daysLeft) : remaining;
+  const actualPerDay = fm / daysElapsed;
+
+  document.getElementById("paceNeeded").textContent = neededPerDay.toFixed(1);
+  document.getElementById("paceActual").textContent = actualPerDay.toFixed(1);
+
+  const statusEl = document.getElementById("paceStatus");
+  if(actualPerDay >= neededPerDay){
+    statusEl.textContent = "Ahead";
+    statusEl.className = "val good";
+  } else {
+    statusEl.textContent = "Behind";
+    statusEl.className = "val behind";
+  }
+
+  document.getElementById("lastUpdated").textContent =
+    "Stats as of last update — " + now.toLocaleDateString("en-US", {month:"short", day:"numeric"});
+}
+
+async function load(){
+  try{
+    const res = await fetch(LIVE_URL, {cache:"no-store"});
+    if(!res.ok) throw new Error("bad response");
+    const json = await res.json();
+    render(json);
+    document.getElementById("lastUpdated").textContent =
+      "Live data loaded " + new Date().toLocaleString("en-US", {month:"short", day:"numeric", hour:"numeric", minute:"2-digit"});
+  } catch(e){
+    render(STATS);
+    document.getElementById("lastUpdated").textContent =
+      "Showing last manual update (live data unavailable)";
+  }
+}
+
+load();
+</script>
+
+</body>
+</html>
