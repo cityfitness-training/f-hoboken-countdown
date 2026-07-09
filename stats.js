@@ -7,7 +7,7 @@
 // ============================================================
 
 const STATS = {
-  "Founding Members": 5,
+  "Founding Members": 380,
   "Total HBK Leads": 964,
   "Performance+": 126,
   "Studio+": 118,
