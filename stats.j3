@@ -7,9 +7,9 @@
 // ============================================================
 
 const STATS = {
-  "Founding Members": 376,
-  "Total HBK Leads": 962,
-  "Performance+": 132,
-  "Studio+": 148,
-  "Neighborhood": 119
+  "Founding Members": 380,
+  "Total HBK Leads": 964,
+  "Performance+": 126,
+  "Studio+": 118,
+  "Neighborhood": 136
 };
