@@ -1,14 +1,19 @@
 // ============================================================
 // FOUNDING MEMBER STATS — this is the ONLY file you ever need to edit.
 //
-// To update: change the numbers below, save, then re-upload this
-// one file to GitHub (it will overwrite the old version automatically).
+// To update: change the numbers below (including "Last Updated"),
+// save, then re-upload/paste this into stats.js on GitHub.
 // You do NOT need to touch index.html ever again.
+//
+// "Last Updated" — type in the current date and time, exactly
+// like the example below. This is what shows on the page so
+// people know how fresh the numbers are.
 // ============================================================
 
 const STATS = {
+  "Last Updated": "July 9, 3:05 PM",
   "Founding Members": 380,
-  "Total HBK Leads": 964,
+  "Total HBK Leads": 963,
   "Performance+": 126,
   "Studio+": 118,
   "Neighborhood": 136
