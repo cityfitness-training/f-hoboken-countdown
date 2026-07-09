@@ -233,6 +233,42 @@
   .pace-divider{width:1px;align-self:stretch;background:var(--tan);}
   @media (max-width:640px){.pace-divider{display:none;}}
 
+  .download-row{
+    text-align:center;
+    padding:40px 0 8px;
+  }
+  .download-btn{
+    background:var(--ink);
+    color:var(--cream);
+    border:none;
+    font-family:'Lato',sans-serif;
+    font-weight:700;
+    font-size:14px;
+    letter-spacing:0.03em;
+    padding:14px 28px;
+    border-radius:30px;
+    cursor:pointer;
+    transition:background 0.2s;
+  }
+  .download-btn:hover{background:var(--slate);}
+
+  @media print{
+    .download-row{display:none;}
+    body{background:white;}
+    .hero{
+      background:var(--ink) !important;
+      -webkit-print-color-adjust:exact;
+      print-color-adjust:exact;
+    }
+    .split-card, .pace-card{
+      -webkit-print-color-adjust:exact;
+      print-color-adjust:exact;
+      break-inside:avoid;
+    }
+    .section{padding:28px 0 8px;}
+    footer{display:none;}
+  }
+
   footer{
     text-align:center;
     font-size:12px;
@@ -437,29 +473,25 @@
     </div>
   </div>
 
+  <div class="download-row">
+    <button class="download-btn" onclick="window.print()">Download Snapshot (PDF)</button>
+  </div>
+
   <footer>
-    Data refreshes automatically from the team's tracker. Refresh this page to see the latest count.
+    Numbers reflect the last manual update to the team's tracker.
   </footer>
 
 </div>
 
-<script src="stats.js"></script>
 <script>
 /* ============================================================
    GOAL / DEADLINE — only change these if the campaign target
    or end date itself changes. Day-to-day number updates happen
    in stats.js, not here.
-
-   LIVE_URL — your Apps Script web app URL. If someone viewing
-   this page is signed into a cityfitness.com Google account,
-   the page will try to load live numbers from your Sheet.
-   If that fails (no CF Google login, or anything else goes
-   wrong), it automatically falls back to the numbers in stats.js.
    ============================================================ */
 const GOAL = 1200;
 const DEADLINE = "2026-09-16T23:59:59";
 const CAMPAIGN_START = "2026-07-06T00:00:00"; // date founding member form opened
-const LIVE_URL = "https://script.google.com/a/macros/cityfitness.com/s/AKfycbxDC3QWXNll79rwm1sLKvdtjxXg3Cf5H0QFnL4n1NUZD2O6gsb3G39g_JJCOMWCxStiJw/exec";
 
 /* ============================================================
    LOGIC — no need to edit below this line
@@ -529,22 +561,19 @@ function render(stats){
     "Stats as of last update — " + now.toLocaleDateString("en-US", {month:"short", day:"numeric"});
 }
 
-async function load(){
-  try{
-    const res = await fetch(LIVE_URL, {cache:"no-store"});
-    if(!res.ok) throw new Error("bad response");
-    const json = await res.json();
-    render(json);
-    document.getElementById("lastUpdated").textContent =
-      "Live data loaded " + new Date().toLocaleString("en-US", {month:"short", day:"numeric", hour:"numeric", minute:"2-digit"});
-  } catch(e){
-    render(STATS);
-    document.getElementById("lastUpdated").textContent =
-      "Showing last manual update (live data unavailable)";
-  }
+// Load stats.js fresh every time, bypassing any cached copy,
+// by appending a constantly-changing query string to the URL.
+function loadStats(){
+  const script = document.createElement("script");
+  script.src = "stats.js?t=" + Date.now();
+  script.onload = function(){ render(STATS); };
+  script.onerror = function(){
+    document.getElementById("lastUpdated").textContent = "Couldn't load stats.js — check the file is in the same folder";
+  };
+  document.body.appendChild(script);
 }
 
-load();
+loadStats();
 </script>
 
 </body>
