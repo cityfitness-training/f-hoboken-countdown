@@ -11,10 +11,10 @@
 // ============================================================
 
 const STATS = {
-  "Last Updated": "July 10, 11:58PM",
-  "Founding Members": 411,
-  "Total HBK Leads": 983,
-  "Performance+": 142,
-  "Studio+": 123,
-  "Neighborhood": 146
+  "Last Updated": "July 12, 9:10AM",
+  "Founding Members": 423,
+  "Total HBK Leads": 989,
+  "Performance+": 147,
+  "Studio+": 125,
+  "Neighborhood": 151
 };
