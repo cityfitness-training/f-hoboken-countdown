@@ -12,7 +12,7 @@
 
 const STATS = {
   "Last Updated": "July 22, 11:45AM",
-  "Founding Members": 6012,
+  "Founding Members": 612,
   "Total HBK Leads": 1106,
   "Performance+": 206,
   "Studio+": 185,
