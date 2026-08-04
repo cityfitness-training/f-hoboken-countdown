@@ -11,7 +11,7 @@
 // ============================================================
 
 const STATS = {
-  "Last Updated": "August 1, 8:00AM",
+  "Last Updated": "August 4, 11:30AM",
 
   // ===========================================================
   // SIGNED AGREEMENTS — the NEW main number on the page.
@@ -19,10 +19,10 @@ const STATS = {
   // (not HubSpot). Update these by hand as real numbers come in.
   // Starts at 0 until you have your first signed agreement.
   // ===========================================================
-  "Signed Agreements": 0,
-  "Signed Performance+": 0,
-  "Signed Studio+": 0,
-  "Signed Neighborhood": 0,
+  "Signed Agreements": 16,
+  "Signed Performance+": 6,
+  "Signed Studio+": 5,
+  "Signed Neighborhood": 5,
 
   // ===========================================================
   // RESERVED MEMBERS ($1 deposit) — this is now LOCKED, historical
