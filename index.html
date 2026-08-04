@@ -233,6 +233,42 @@
   .pace-divider{width:1px;align-self:stretch;background:var(--tan);}
   @media (max-width:640px){.pace-divider{display:none;}}
 
+  /* ---------- RESERVED MEMBERS (secondary, smaller) ---------- */
+  .reserved-section{opacity:0.94;}
+  .reserved-card{
+    background:var(--tan);
+    border-radius:14px;
+    padding:22px 26px;
+    text-align:center;
+  }
+  .reserved-count{
+    font-size:38px;
+    font-weight:900;
+    color:var(--copper-deep);
+    line-height:1;
+  }
+  .reserved-lbl{
+    font-size:11px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--slate);
+    font-weight:700;
+    margin-top:4px;
+  }
+  .reserved-split{
+    display:flex;
+    justify-content:center;
+    gap:36px;
+    margin-top:18px;
+    flex-wrap:wrap;
+  }
+  .reserved-mini{text-align:center;}
+  .reserved-mini .mval{font-size:19px;font-weight:900;color:var(--ink);}
+  .reserved-mini .mlbl{
+    font-size:10px;letter-spacing:0.06em;text-transform:uppercase;
+    color:var(--slate);font-weight:700;margin-top:2px;
+  }
+
   .download-row{
     text-align:center;
     padding:40px 0 8px;
@@ -301,12 +337,12 @@
     <span class="bignum" id="fmCount">—</span>
     <span class="bignum-of" id="fmGoal">/ 1,200</span>
   </div>
-  <p class="bignum-label">Founding Members Secured</p>
+  <p class="bignum-label">Signed Agreements Secured</p>
 
   <div class="stat-strip">
     <div class="stat">
-      <div class="val" id="statConversion">—</div>
-      <div class="lbl">Lead Conversion</div>
+      <div class="val" id="statConversion">Coming Soon</div>
+      <div class="lbl">Deposit → Signed</div>
     </div>
     <div class="stat">
       <div class="val" id="statDays">—</div>
@@ -327,7 +363,7 @@
     <p class="section-title">Overall Progress</p>
     <div class="gauge-block">
       <div class="gauge-caption">
-        <span class="name">To 1,200 Founding Members</span>
+        <span class="name">To 1,200 Signed Agreements</span>
       </div>
       <div class="main-count" id="mainCount">— <span id="mainPct"></span></div>
       <svg class="gauge" viewBox="0 0 600 100" id="mainGauge">
@@ -363,7 +399,7 @@
   </div>
 
   <div class="section">
-    <p class="section-title">Membership Type Split</p>
+    <p class="section-title">Membership Type Split (Signed)</p>
     <div class="split-grid">
 
       <div class="split-card">
@@ -473,6 +509,28 @@
     </div>
   </div>
 
+  <div class="section reserved-section">
+    <p class="section-title">Reserved Members &mdash; Launched 7/6/2026</p>
+    <div class="reserved-card">
+      <div class="reserved-count" id="reservedCount">&mdash;</div>
+      <div class="reserved-lbl">$1 Deposits (Locked)</div>
+      <div class="reserved-split">
+        <div class="reserved-mini">
+          <div class="mval" id="rPCount">&mdash;</div>
+          <div class="mlbl">Performance+</div>
+        </div>
+        <div class="reserved-mini">
+          <div class="mval" id="rSCount">&mdash;</div>
+          <div class="mlbl">Studio+</div>
+        </div>
+        <div class="reserved-mini">
+          <div class="mval" id="rNCount">&mdash;</div>
+          <div class="mlbl">Neighborhood</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="download-row">
     <button class="download-btn" onclick="window.print()">Download Snapshot (PDF)</button>
   </div>
@@ -500,25 +558,26 @@ const CAMPAIGN_START = "2026-07-06T00:00:00"; // date founding member form opene
 function fmtNum(n){ return Number(n).toLocaleString("en-US"); }
 
 function render(stats){
-  const fm = Number(stats["Founding Members"]) || 0;
+  const fm = Number(stats["Signed Agreements"]) || 0;
   const leads = Number(stats["Total HBK Leads"]) || 0;
-  const p = Number(stats["Performance+"]) || 0;
-  const s = Number(stats["Studio+"]) || 0;
-  const n = Number(stats["Neighborhood"]) || 0;
+  const p = Number(stats["Signed Performance+"]) || 0;
+  const s = Number(stats["Signed Studio+"]) || 0;
+  const n = Number(stats["Signed Neighborhood"]) || 0;
 
   const pctOfGoal = Math.min(100, (fm / GOAL) * 100);
-  const conversion = leads > 0 ? (fm / leads) * 100 : 0;
+  // NOTE: "Deposit → Signed" conversion is intentionally a placeholder
+  // (see the "Coming Soon" text in index.html) until deposit-to-signed
+  // tracking is built. Nothing to compute here yet.
 
   document.getElementById("fmCount").textContent = fmtNum(fm);
   document.getElementById("fmGoal").textContent = "/ " + fmtNum(GOAL);
-  document.getElementById("statConversion").textContent = conversion.toFixed(2) + "%";
   document.getElementById("statLeads").textContent = fmtNum(leads);
   document.getElementById("mainCount").innerHTML = fmtNum(fm) + " / " + fmtNum(GOAL) + " <span>(" + pctOfGoal.toFixed(0) + "%)</span>";
 
   // main dumbbell fill: viewBox width 600
   document.getElementById("mainFill").setAttribute("width", (pctOfGoal/100*600).toFixed(1));
 
-  // membership split
+  // membership split (signed)
   const total = p + s + n;
   const pPct = total ? (p/total*100) : 0;
   const sPct = total ? (s/total*100) : 0;
@@ -531,6 +590,21 @@ function render(stats){
   document.getElementById("fillP").setAttribute("width", (pPct/100*300).toFixed(1));
   document.getElementById("fillS").setAttribute("width", (sPct/100*300).toFixed(1));
   document.getElementById("fillN").setAttribute("width", (nPct/100*300).toFixed(1));
+
+  // ---- Reserved Members (secondary, locked $1-deposit data) ----
+  const rm = Number(stats["Reserved Members"]) || 0;
+  const rp = Number(stats["Reserved Performance+"]) || 0;
+  const rs = Number(stats["Reserved Studio+"]) || 0;
+  const rn = Number(stats["Reserved Neighborhood"]) || 0;
+  const rTotal = rp + rs + rn;
+  const rpPct = rTotal ? (rp/rTotal*100) : 0;
+  const rsPct = rTotal ? (rs/rTotal*100) : 0;
+  const rnPct = rTotal ? (rn/rTotal*100) : 0;
+
+  document.getElementById("reservedCount").textContent = fmtNum(rm);
+  document.getElementById("rPCount").innerHTML = fmtNum(rp) + " (" + rpPct.toFixed(0) + "%)";
+  document.getElementById("rSCount").innerHTML = fmtNum(rs) + " (" + rsPct.toFixed(0) + "%)";
+  document.getElementById("rNCount").innerHTML = fmtNum(rn) + " (" + rnPct.toFixed(0) + "%)";
 
   // days remaining
   const now = new Date();
