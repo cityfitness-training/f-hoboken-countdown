@@ -12,9 +12,30 @@
 
 const STATS = {
   "Last Updated": "August 1, 8:00AM",
-  "Founding Members": 753,
-  "Total HBK Leads": 1173,
-  "Performance+": 264,
-  "Studio+": 223,
-  "Neighborhood": 266
+
+  // ===========================================================
+  // SIGNED AGREEMENTS — the NEW main number on the page.
+  // This comes from your separate signed-agreement tracker
+  // (not HubSpot). Update these by hand as real numbers come in.
+  // Starts at 0 until you have your first signed agreement.
+  // ===========================================================
+  "Signed Agreements": 0,
+  "Signed Performance+": 0,
+  "Signed Studio+": 0,
+  "Signed Neighborhood": 0,
+
+  // ===========================================================
+  // RESERVED MEMBERS ($1 deposit) — this is now LOCKED, historical
+  // data from the deposit campaign that launched 7/6/2026.
+  // Leave these numbers as-is — they no longer change.
+  // ===========================================================
+  "Reserved Members": 753,
+  "Reserved Performance+": 264,
+  "Reserved Studio+": 223,
+  "Reserved Neighborhood": 266,
+
+  // ===========================================================
+  // OVERALL LEADS — still tracked, still updates.
+  // ===========================================================
+  "Total HBK Leads": 1173
 };
