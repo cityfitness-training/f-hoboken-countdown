@@ -11,7 +11,7 @@
 // ============================================================
 
 const STATS = {
-  "Last Updated": "August 10, 9:00AM",
+  "Last Updated": "August 10, 4:30PM",
 
   // ===========================================================
   // SIGNED AGREEMENTS — the NEW main number on the page.
@@ -19,9 +19,9 @@ const STATS = {
   // (not HubSpot). Update these by hand as real numbers come in.
   // Starts at 0 until you have your first signed agreement.
   // ===========================================================
-  "Signed Agreements": 37,
-  "Signed Performance+": 15,
-  "Signed Studio+": 13,
+  "Signed Agreements": 39,
+  "Signed Performance+": 16,
+  "Signed Studio+": 14,
   "Signed Neighborhood": 9,
 
   // ===========================================================
