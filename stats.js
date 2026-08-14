@@ -11,7 +11,7 @@
 // ============================================================
 
 const STATS = {
-  "Last Updated": "August 13, 4:45PM",
+  "Last Updated": "August 14, 8:00AM",
 
   // ===========================================================
   // SIGNED AGREEMENTS — the NEW main number on the page.
