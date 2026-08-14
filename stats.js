@@ -19,9 +19,9 @@ const STATS = {
   // (not HubSpot). Update these by hand as real numbers come in.
   // Starts at 0 until you have your first signed agreement.
   // ===========================================================
-  "Signed Agreements": 54,
+  "Signed Agreements": 56,
   "Signed Performance+": 21,
-  "Signed Studio+": 21,
+  "Signed Studio+": 23,
   "Signed Neighborhood": 12,
 
   // ===========================================================
