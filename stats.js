@@ -19,10 +19,10 @@ const STATS = {
   // (not HubSpot). Update these by hand as real numbers come in.
   // Starts at 0 until you have your first signed agreement.
   // ===========================================================
-  "Signed Agreements": 102,
-  "Signed Performance+": 30,
+  "Signed Agreements": 106,
+  "Signed Performance+": 43,
   "Signed Studio+": 39,
-  "Signed Neighborhood": 23,
+  "Signed Neighborhood": 24,
 
   // ===========================================================
   // RESERVED MEMBERS ($1 deposit) — this is now LOCKED, historical
