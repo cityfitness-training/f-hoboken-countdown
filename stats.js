@@ -29,7 +29,7 @@ const STATS = {
   // data from the deposit campaign that launched 7/6/2026.
   // Leave these numbers as-is — they no longer change.
   // ===========================================================
-  "Reserved Members": 753,
+  "Reserved Members": 725,
   "Reserved Performance+": 264,
   "Reserved Studio+": 223,
   "Reserved Neighborhood": 266,
