@@ -25,6 +25,17 @@ const STATS = {
   "Signed Neighborhood": 67,
 
   // ===========================================================
+  // DEPOSIT → SIGNED — of the people who put down the $1 deposit,
+  // how many have since actually signed an agreement. This is a
+  // SUBSET of "Signed Agreements" above (some people sign without
+  // ever having put down a deposit first, so this number will
+  // usually be smaller than "Signed Agreements").
+  // Update this by hand — it's the same number you'd count by
+  // cross-checking your signed list against your reserved list.
+  // ===========================================================
+  "Deposit Signed Count": 114,
+
+  // ===========================================================
   // RESERVED MEMBERS ($1 deposit) — this is now LOCKED, historical
   // data from the deposit campaign that launched 7/6/2026.
   // Leave these numbers as-is — they no longer change.
