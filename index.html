@@ -548,6 +548,7 @@
    in stats.js, not here.
    ============================================================ */
 const GOAL = 1200;
+const RESERVED_ACTUAL = 725; // corrected reserved-member count (excludes failed $1 payments) — used only for the Deposit → Signed conversion stat
 const DEADLINE = "2026-09-16T23:59:59";
 const CAMPAIGN_START = "2026-07-06T00:00:00"; // date founding member form opened
 
@@ -565,9 +566,13 @@ function render(stats){
   const n = Number(stats["Signed Neighborhood"]) || 0;
 
   const pctOfGoal = Math.min(100, (fm / GOAL) * 100);
-  // NOTE: "Deposit → Signed" conversion is intentionally a placeholder
-  // (see the "Coming Soon" text in index.html) until deposit-to-signed
-  // tracking is built. Nothing to compute here yet.
+
+  // Deposit → Signed: of the RESERVED_ACTUAL (725) people who put down
+  // the $1 deposit, how many have since signed an agreement.
+  const depositSigned = Number(stats["Deposit Signed Count"]) || 0;
+  const depositSignedPct = RESERVED_ACTUAL > 0 ? (depositSigned / RESERVED_ACTUAL * 100) : 0;
+  document.getElementById("statConversion").innerHTML =
+    fmtNum(depositSigned) + " / " + fmtNum(RESERVED_ACTUAL) + " <span style='font-size:0.6em;'>(" + depositSignedPct.toFixed(0) + "%)</span>";
 
   document.getElementById("fmCount").textContent = fmtNum(fm);
   document.getElementById("fmGoal").textContent = "/ " + fmtNum(GOAL);
