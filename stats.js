@@ -11,7 +11,7 @@
 // ============================================================
 
 const STATS = {
-  "Last Updated": "August 30, 12:00PM",
+  "Last Updated": "August 31, 11:00AM",
 
   // ===========================================================
   // SIGNED AGREEMENTS — the NEW main number on the page.
@@ -19,10 +19,10 @@ const STATS = {
   // (not HubSpot). Update these by hand as real numbers come in.
   // Starts at 0 until you have your first signed agreement.
   // ===========================================================
-  "Signed Agreements": 481,
-  "Signed Performance+": 191,
-  "Signed Studio+": 153,
-  "Signed Neighborhood": 137,
+  "Signed Agreements": 503,
+  "Signed Performance+": 198,
+  "Signed Studio+": 162,
+  "Signed Neighborhood": 143,
 
   // ===========================================================
   // DEPOSIT → SIGNED — of the people who put down the $1 deposit,
@@ -33,7 +33,7 @@ const STATS = {
   // Update this by hand — it's the same number you'd count by
   // cross-checking your signed list against your reserved list.
   // ===========================================================
-  "Deposit Signed Count": 285,
+  "Deposit Signed Count": 303,
 
   // ===========================================================
   // RESERVED MEMBERS ($1 deposit) — this is now LOCKED, historical
