@@ -11,7 +11,7 @@
 // ============================================================
 
 const STATS = {
-  "Last Updated": "September 9, 10:15AM",
+  "Last Updated": "September 10, 11:00AM",
 
   // ===========================================================
   // SIGNED AGREEMENTS — the NEW main number on the page.
@@ -19,10 +19,10 @@ const STATS = {
   // (not HubSpot). Update these by hand as real numbers come in.
   // Starts at 0 until you have your first signed agreement.
   // ===========================================================
-  "Signed Agreements": 701,
-  "Signed Performance+": 274,
-  "Signed Studio+": 229,
-  "Signed Neighborhood": 198,
+  "Signed Agreements": 727,
+  "Signed Performance+": 284,
+  "Signed Studio+": 239,
+  "Signed Neighborhood": 204,
 
   // ===========================================================
   // DEPOSIT → SIGNED — of the people who put down the $1 deposit,
@@ -48,5 +48,5 @@ const STATS = {
   // ===========================================================
   // OVERALL LEADS — still tracked, still updates.
   // ===========================================================
-  "Total HBK Leads": 1512
+  "Total HBK Leads": 1538
 };
