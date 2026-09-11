@@ -11,7 +11,7 @@
 // ============================================================
 
 const STATS = {
-  "Last Updated": "September 10, 6:30PM",
+  "Last Updated": "September 11, 12:30PM",
 
   // ===========================================================
   // SIGNED AGREEMENTS — the NEW main number on the page.
@@ -20,8 +20,8 @@ const STATS = {
   // Starts at 0 until you have your first signed agreement.
   // ===========================================================
   "Signed Agreements": 747,
-  "Signed Performance+": 288,
-  "Signed Studio+": 240,
+  "Signed Performance+": 290,
+  "Signed Studio+": 241,
   "Signed Neighborhood": 206,
 
   // ===========================================================
@@ -48,5 +48,5 @@ const STATS = {
   // ===========================================================
   // OVERALL LEADS — still tracked, still updates.
   // ===========================================================
-  "Total HBK Leads": 1538
+  "Total HBK Leads": 1602
 };
