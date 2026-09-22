@@ -19,9 +19,9 @@ const STATS = {
   // (not HubSpot). Update these by hand as real numbers come in.
   // Starts at 0 until you have your first signed agreement.
   // ===========================================================
-  "Signed Agreements": 886,
-  "Signed Performance+": 351,
-  "Signed Studio+": 300,
+  "Signed Agreements": 890,
+  "Signed Performance+": 353,
+  "Signed Studio+": 302,
   "Signed Neighborhood": 235,
   // ===========================================================
   // DEPOSIT → SIGNED — of the people who put down the $1 deposit,
