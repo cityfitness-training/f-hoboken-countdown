@@ -20,10 +20,10 @@ const STATS = {
     "Reserved Members": 725,
     "Total Leads": 2149,
 
-    "EFT Performance+": 38,705.50,
-    "EFT Studio+": 28,700.00,
-    "EFT Neighborhood": 18,699.50,
-    "Total Expected EFT": 86,105.00,
+    "EFT Performance+": 38705.50,
+    "EFT Studio+": 28700.00,
+    "EFT Neighborhood": 18699.50,
+    "Total Expected EFT": 86105.00,
     "Avg Ticket Price": 88.95
   },
 
