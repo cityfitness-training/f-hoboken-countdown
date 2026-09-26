@@ -69,6 +69,13 @@ body{
   font-weight:400;
   margin:0;
 }
+.club-name{
+  font-size:15px;
+  font-weight:700;
+  letter-spacing:0.04em;
+  color:var(--copper-light);
+  margin:0;
+}
 .bignum-row{
   display:flex;
   justify-content:center;
@@ -232,25 +239,44 @@ svg.gauge{width:100%;display:block;overflow:visible;}
 .pace-divider{width:1px;align-self:stretch;background:var(--tan);}
 @media (max-width:640px){.pace-divider{display:none;}}
 
-/* ---------- RESERVED MEMBERS ---------- */
-.reserved-card{
-  background:var(--tan);
+/* ---------- EFT COLLECTED ---------- */
+.eft-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:16px;
+  margin-bottom:16px;
+}
+.southend-col .eft-grid{grid-template-columns:1fr;}
+.eft-card{
+  background:#fff;
+  border:1px solid var(--tan);
   border-radius:14px;
-  padding:20px 22px;
+  padding:18px 18px 16px;
   text-align:center;
 }
-.reserved-count{font-size:32px;font-weight:900;color:var(--copper-deep);line-height:1;}
-.reserved-lbl{
-  font-size:10px;letter-spacing:0.08em;text-transform:uppercase;
-  color:var(--slate);font-weight:700;margin-top:4px;
+.eft-card .name{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:8px;}
+.eft-card .amt{font-size:24px;font-weight:900;color:var(--copper-deep);}
+.eft-summary-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
 }
-.reserved-split{display:flex;justify-content:center;gap:26px;margin-top:16px;flex-wrap:wrap;}
-.reserved-mini{text-align:center;}
-.reserved-mini .mval{font-size:17px;font-weight:900;color:var(--ink);}
-.reserved-mini .mlbl{
-  font-size:9px;letter-spacing:0.06em;text-transform:uppercase;
-  color:var(--slate);font-weight:700;margin-top:2px;
+.eft-summary-card{
+  background:var(--ink);
+  color:var(--cream);
+  border-radius:14px;
+  padding:18px 18px 16px;
+  text-align:center;
 }
+.eft-summary-card .name{
+  font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;
+  color:var(--tan);margin-bottom:8px;
+}
+.eft-summary-card .amt{font-size:26px;font-weight:900;color:var(--copper-light);}
+.southend-col .eft-card .amt,
+.southend-col .eft-summary-card .amt{color:var(--dim-text);}
+.southend-col .eft-summary-card{background:#EFEAE3;}
+.southend-col .eft-summary-card .name{color:var(--dim-text);}
 
 /* ---------- SOUTHEND (dimmed / coming soon) ---------- */
 .southend-col{opacity:0.65;}
@@ -259,7 +285,6 @@ svg.gauge{width:100%;display:block;overflow:visible;}
   border-color:var(--dim-line);
   background:#FCFAF8;
 }
-.southend-col .reserved-card{background:#EFEAE3;}
 .coming-soon-flag{
   display:inline-block;
   font-size:11px;
@@ -272,8 +297,7 @@ svg.gauge{width:100%;display:block;overflow:visible;}
   border-radius:20px;
 }
 .southend-col .main-count,
-.southend-col .split-card .count,
-.southend-col .reserved-count{color:var(--dim-text);}
+.southend-col .split-card .count{color:var(--dim-text);}
 .southend-col .split-card .count span,
 .southend-col .pace-item .val{color:var(--dim-text);}
 
@@ -323,13 +347,14 @@ footer a{color:var(--copper-deep);}
 <body>
 
 <div class="hero">
-  <p class="eyebrow">City Fitness · Hoboken</p>
-  <h1>Founding Member Countdown</h1>
+  <p class="eyebrow">City Fitness</p>
+  <h1>New Member Countdown</h1>
+  <p class="club-name">Maxwell Place</p>
   <div class="bignum-row">
     <span class="bignum" id="fmCount">—</span>
     <span class="bignum-of" id="fmGoal">/ 1,200</span>
   </div>
-  <p class="bignum-label">Signed Agreements Secured (Maxwell Place)</p>
+  <p class="bignum-label">Signed Agreements</p>
   <div class="stat-strip">
     <div class="stat">
       <div class="val" id="statConversion">—</div>
@@ -410,6 +435,34 @@ footer a{color:var(--copper-deep);}
       </div>
 
       <div class="section">
+        <p class="section-title">EFT Collected</p>
+        <div class="eft-grid">
+          <div class="eft-card">
+            <div class="name">Performance+ EFT</div>
+            <div class="amt" id="mxEftP">—</div>
+          </div>
+          <div class="eft-card">
+            <div class="name">Studio+ EFT</div>
+            <div class="amt" id="mxEftS">—</div>
+          </div>
+          <div class="eft-card">
+            <div class="name">Neighborhood EFT</div>
+            <div class="amt" id="mxEftN">—</div>
+          </div>
+        </div>
+        <div class="eft-summary-grid">
+          <div class="eft-summary-card">
+            <div class="name">Total Expected EFT</div>
+            <div class="amt" id="mxEftTotal">—</div>
+          </div>
+          <div class="eft-summary-card">
+            <div class="name">Avg. Ticket Price</div>
+            <div class="amt" id="mxEftAvg">—</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section" style="padding-bottom:0;">
         <p class="section-title">Pace Check</p>
         <div class="pace-card">
           <div class="pace-item">
@@ -425,19 +478,6 @@ footer a{color:var(--copper-deep);}
           <div class="pace-item">
             <div class="val" id="mxPaceStatus">—</div>
             <div class="lbl">On Track?</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="section" style="padding-bottom:0;">
-        <p class="section-title">Reserved Members — $1 Deposits</p>
-        <div class="reserved-card">
-          <div class="reserved-count" id="mxReservedCount">—</div>
-          <div class="reserved-lbl">Locked Deposits</div>
-          <div class="reserved-split">
-            <div class="reserved-mini"><div class="mval" id="mxRPCount">—</div><div class="mlbl">Performance+</div></div>
-            <div class="reserved-mini"><div class="mval" id="mxRSCount">—</div><div class="mlbl">Studio+</div></div>
-            <div class="reserved-mini"><div class="mval" id="mxRNCount">—</div><div class="mlbl">Neighborhood</div></div>
           </div>
         </div>
       </div>
@@ -464,20 +504,12 @@ footer a{color:var(--copper-deep);}
         </div>
       </div>
 
-      <div class="section">
+      <div class="section" style="padding-bottom:0;">
         <p class="section-title">Pace Check</p>
         <div class="pace-card">
           <div class="pace-item"><div class="val">—</div><div class="lbl">Needed / Day</div></div>
           <div class="pace-divider"></div>
           <div class="pace-item"><div class="val">—</div><div class="lbl">Actual Pace</div></div>
-        </div>
-      </div>
-
-      <div class="section" style="padding-bottom:0;">
-        <p class="section-title">Reserved Members</p>
-        <div class="reserved-card">
-          <div class="reserved-count">—</div>
-          <div class="reserved-lbl">Presale not yet open</div>
         </div>
       </div>
     </div>
@@ -575,14 +607,19 @@ function render(stats){
     statusEl.className = "val behind";
   }
 
-  // ---- Maxwell: reserved members ----
-  const rp = Number(mx["Reserved Performance+"]) || 0;
-  const rs = Number(mx["Reserved Studio+"]) || 0;
-  const rn = Number(mx["Reserved Neighborhood"]) || 0;
-  document.getElementById("mxReservedCount").textContent = fmtNum(reservedTotal);
-  document.getElementById("mxRPCount").textContent = fmtNum(rp);
-  document.getElementById("mxRSCount").textContent = fmtNum(rs);
-  document.getElementById("mxRNCount").textContent = fmtNum(rn);
+  // ---- Maxwell: EFT collected ----
+  // These are typed straight from the tracker — not calculated here —
+  // so Total Expected EFT should be entered as its own value in stats.js.
+  function fmtMoney(v){
+    return v === undefined || v === null || v === ""
+      ? "—"
+      : "$" + Number(v).toLocaleString("en-US", {minimumFractionDigits:2, maximumFractionDigits:2});
+  }
+  document.getElementById("mxEftP").textContent = fmtMoney(mx["EFT Performance+"]);
+  document.getElementById("mxEftS").textContent = fmtMoney(mx["EFT Studio+"]);
+  document.getElementById("mxEftN").textContent = fmtMoney(mx["EFT Neighborhood"]);
+  document.getElementById("mxEftTotal").textContent = fmtMoney(mx["Total Expected EFT"]);
+  document.getElementById("mxEftAvg").textContent = fmtMoney(mx["Avg Ticket Price"]);
 
   const lastUpdatedText = stats["Last Updated"];
   document.getElementById("lastUpdated").textContent =
