@@ -7,341 +7,332 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,400&display=swap" rel="stylesheet">
 <style>
-  /* ============================================================
-     This page reads its numbers from stats.js (a separate small
-     file sitting next to this one). To update the numbers,
-     edit stats.js — never edit this file.
-     ============================================================ */
+/* ============================================================
+   This page reads its numbers from stats.js (a separate small
+   file sitting next to this one). To update the numbers,
+   edit stats.js — never edit this file.
+============================================================ */
+:root{
+  --ink:#231F20;
+  --slate:#414042;
+  --copper-deep:#AE7C58;
+  --copper-light:#F3BE87;
+  --tan:#E4C7AA;
+  --cream:#FFF9F6;
+  --dim-line:#D8D2CC;
+  --dim-text:#9C958D;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  background:var(--cream);
+  color:var(--ink);
+  font-family:'Lato',sans-serif;
+  -webkit-font-smoothing:antialiased;
+  min-height:100vh;
+}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px 80px;}
 
-  :root{
-    --ink:#231F20;
-    --slate:#414042;
-    --copper-deep:#AE7C58;
-    --copper-light:#F3BE87;
-    --tan:#E4C7AA;
-    --cream:#FFF9F6;
-  }
+/* ---------- HERO ---------- */
+.hero{
+  background:var(--ink);
+  color:var(--cream);
+  padding:56px 24px 64px;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(135deg, rgba(174,124,88,0.18), transparent 55%);
+  pointer-events:none;
+}
+.eyebrow{
+  font-size:13px;
+  letter-spacing:0.18em;
+  text-transform:uppercase;
+  font-weight:700;
+  color:var(--copper-light);
+  margin:0 0 14px;
+}
+.hero h1{
+  font-size:clamp(28px,5vw,44px);
+  font-weight:900;
+  margin:0 0 6px;
+  letter-spacing:-0.01em;
+}
+.hero .sub{
+  font-size:16px;
+  color:var(--tan);
+  font-weight:400;
+  margin:0;
+}
+.bignum-row{
+  display:flex;
+  justify-content:center;
+  align-items:baseline;
+  gap:10px;
+  margin:36px 0 4px;
+  flex-wrap:wrap;
+}
+.bignum{
+  font-size:clamp(56px,12vw,108px);
+  font-weight:900;
+  line-height:1;
+  background:linear-gradient(135deg, var(--copper-light), var(--copper-deep));
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
+.bignum-of{
+  font-size:clamp(24px,4vw,34px);
+  font-weight:700;
+  color:var(--tan);
+}
+.bignum-label{
+  font-size:14px;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  color:var(--tan);
+  font-weight:700;
+  margin-top:4px;
+}
+.bignum-sub{
+  font-size:13px;
+  color:var(--tan);
+  opacity:0.75;
+  margin-top:2px;
+}
+.stat-strip{
+  display:flex;
+  justify-content:center;
+  gap:48px;
+  margin-top:36px;
+  flex-wrap:wrap;
+}
+.stat{text-align:center;}
+.stat .val{font-size:28px;font-weight:900;color:var(--copper-light);}
+.stat .lbl{
+  font-size:11px;letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--tan);font-weight:700;margin-top:2px;
+}
 
-  *{box-sizing:border-box;}
-  html,body{margin:0;padding:0;}
-  body{
-    background:var(--cream);
-    color:var(--ink);
-    font-family:'Lato',sans-serif;
-    -webkit-font-smoothing:antialiased;
-    min-height:100vh;
-  }
+/* ---------- CLUB GRID ---------- */
+.clubs-grid{
+  display:grid;
+  grid-template-columns:2fr 1fr;
+  gap:36px;
+  align-items:start;
+  padding-top:48px;
+}
+@media (max-width:860px){
+  .clubs-grid{grid-template-columns:1fr;}
+}
+.club-header{
+  display:flex;
+  align-items:baseline;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:22px;
+  padding-bottom:14px;
+  border-bottom:2px solid var(--ink);
+}
+.club-header h2{
+  font-size:22px;
+  font-weight:900;
+  margin:0;
+  letter-spacing:-0.01em;
+}
+.club-header .club-tag{
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  color:var(--copper-deep);
+}
+.southend-col .club-header{border-bottom-color:var(--dim-line);}
+.southend-col .club-header h2{color:var(--dim-text);}
+.southend-col .club-header .club-tag{color:var(--dim-text);}
 
-  .wrap{max-width:1000px;margin:0 auto;padding:0 24px 80px;}
+.section{padding:0 0 40px;}
+.section-title{
+  font-size:12px;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  font-weight:700;
+  color:var(--slate);
+  margin:0 0 16px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.section-title::after{
+  content:"";
+  flex:1;
+  height:1px;
+  background:var(--tan);
+}
+.southend-col .section-title{color:var(--dim-text);}
+.southend-col .section-title::after{background:var(--dim-line);}
 
-  /* ---------- HERO ---------- */
-  .hero{
-    background:var(--ink);
-    color:var(--cream);
-    padding:56px 24px 64px;
-    text-align:center;
-    position:relative;
-    overflow:hidden;
-  }
-  .hero::before{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:linear-gradient(135deg, rgba(174,124,88,0.18), transparent 55%);
-    pointer-events:none;
-  }
-  .eyebrow{
-    font-size:13px;
-    letter-spacing:0.18em;
-    text-transform:uppercase;
-    font-weight:700;
-    color:var(--copper-light);
-    margin:0 0 14px;
-  }
-  .hero h1{
-    font-size:clamp(28px,5vw,44px);
-    font-weight:900;
-    margin:0 0 6px;
-    letter-spacing:-0.01em;
-  }
-  .hero .sub{
-    font-size:16px;
-    color:var(--tan);
-    font-weight:400;
-    margin:0;
-  }
+.gauge-block{margin-bottom:4px;}
+.main-count{
+  font-size:34px;
+  font-weight:900;
+  color:var(--copper-deep);
+  margin:6px 0 16px;
+}
+.main-count span{font-size:16px;color:var(--slate);font-weight:700;}
+svg.gauge{width:100%;display:block;overflow:visible;}
+.track{fill:none;stroke:var(--tan);stroke-width:2;}
+.fillbar{transition:width 1.1s cubic-bezier(.16,1,.3,1);}
 
-  .bignum-row{
-    display:flex;
-    justify-content:center;
-    align-items:baseline;
-    gap:10px;
-    margin:36px 0 4px;
-    flex-wrap:wrap;
-  }
-  .bignum{
-    font-size:clamp(56px,12vw,108px);
-    font-weight:900;
-    line-height:1;
-    background:linear-gradient(135deg, var(--copper-light), var(--copper-deep));
-    -webkit-background-clip:text;
-    background-clip:text;
-    color:transparent;
-  }
-  .bignum-of{
-    font-size:clamp(24px,4vw,34px);
-    font-weight:700;
-    color:var(--tan);
-  }
-  .bignum-label{
-    font-size:14px;
-    letter-spacing:0.08em;
-    text-transform:uppercase;
-    color:var(--tan);
-    font-weight:700;
-    margin-top:4px;
-  }
+/* ---------- MEMBERSHIP SPLIT ---------- */
+.split-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:16px;
+}
+.southend-col .split-grid{grid-template-columns:1fr;}
+@media (max-width:640px){
+  .clubs-grid > .maxwell-col .split-grid{grid-template-columns:1fr;}
+}
+.split-card{
+  background:#fff;
+  border:1px solid var(--tan);
+  border-radius:14px;
+  padding:18px 18px 16px;
+}
+.split-card .name{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:2px;}
+.split-card .count{font-size:26px;font-weight:900;color:var(--copper-deep);margin:2px 0 12px;}
+.split-card .count span{font-size:14px;color:var(--slate);font-weight:700;}
 
-  .stat-strip{
-    display:flex;
-    justify-content:center;
-    gap:48px;
-    margin-top:36px;
-    flex-wrap:wrap;
-  }
-  .stat{
-    text-align:center;
-  }
-  .stat .val{
-    font-size:28px;
-    font-weight:900;
-    color:var(--copper-light);
-  }
-  .stat .lbl{
-    font-size:11px;
-    letter-spacing:0.1em;
-    text-transform:uppercase;
-    color:var(--tan);
-    font-weight:700;
-    margin-top:2px;
-  }
+/* ---------- PACE ---------- */
+.pace-card{
+  background:#fff;
+  border:1px solid var(--tan);
+  border-radius:14px;
+  padding:22px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:18px;
+  flex-wrap:wrap;
+}
+.pace-item{text-align:center;flex:1;min-width:110px;}
+.pace-item .val{font-size:26px;font-weight:900;color:var(--ink);}
+.pace-item .val.good{color:#3f7d52;}
+.pace-item .val.behind{color:#b0483f;}
+.pace-item .lbl{
+  font-size:10px;letter-spacing:0.08em;text-transform:uppercase;
+  color:var(--slate);font-weight:700;margin-top:4px;
+}
+.pace-divider{width:1px;align-self:stretch;background:var(--tan);}
+@media (max-width:640px){.pace-divider{display:none;}}
 
-  /* ---------- MAIN GAUGE (overall) ---------- */
-  .section{
-    padding:48px 0 8px;
-  }
-  .section-title{
-    font-size:12px;
-    letter-spacing:0.14em;
-    text-transform:uppercase;
-    font-weight:700;
-    color:var(--slate);
-    margin:0 0 18px;
-    display:flex;
-    align-items:center;
-    gap:10px;
-  }
-  .section-title::after{
-    content:"";
-    flex:1;
-    height:1px;
-    background:var(--tan);
-  }
+/* ---------- RESERVED MEMBERS ---------- */
+.reserved-card{
+  background:var(--tan);
+  border-radius:14px;
+  padding:20px 22px;
+  text-align:center;
+}
+.reserved-count{font-size:32px;font-weight:900;color:var(--copper-deep);line-height:1;}
+.reserved-lbl{
+  font-size:10px;letter-spacing:0.08em;text-transform:uppercase;
+  color:var(--slate);font-weight:700;margin-top:4px;
+}
+.reserved-split{display:flex;justify-content:center;gap:26px;margin-top:16px;flex-wrap:wrap;}
+.reserved-mini{text-align:center;}
+.reserved-mini .mval{font-size:17px;font-weight:900;color:var(--ink);}
+.reserved-mini .mlbl{
+  font-size:9px;letter-spacing:0.06em;text-transform:uppercase;
+  color:var(--slate);font-weight:700;margin-top:2px;
+}
 
-  .gauge-block{margin-bottom:8px;}
-  .gauge-caption{
-    display:flex;
-    justify-content:space-between;
-    align-items:baseline;
-    margin-bottom:10px;
-    font-weight:700;
-  }
-  .gauge-caption .name{font-size:16px;color:var(--ink);}
-  .gauge-caption .pct{font-size:15px;color:var(--copper-deep);}
+/* ---------- SOUTHEND (dimmed / coming soon) ---------- */
+.southend-col{opacity:0.65;}
+.southend-col .split-card,
+.southend-col .pace-card{
+  border-color:var(--dim-line);
+  background:#FCFAF8;
+}
+.southend-col .reserved-card{background:#EFEAE3;}
+.coming-soon-flag{
+  display:inline-block;
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+  color:var(--dim-text);
+  border:1px solid var(--dim-line);
+  padding:3px 10px;
+  border-radius:20px;
+}
+.southend-col .main-count,
+.southend-col .split-card .count,
+.southend-col .reserved-count{color:var(--dim-text);}
+.southend-col .split-card .count span,
+.southend-col .pace-item .val{color:var(--dim-text);}
 
-  .main-count{
-    font-size:40px;
-    font-weight:900;
-    color:var(--copper-deep);
-    margin:6px 0 18px;
-  }
-  .main-count span{
-    font-size:18px;
-    color:var(--slate);
-    font-weight:700;
-  }
-
-  svg.gauge{width:100%;display:block;overflow:visible;}
-  .track{fill:none;stroke:var(--tan);stroke-width:2;}
-  .fillbar{transition:width 1.1s cubic-bezier(.16,1,.3,1);}
-
-  /* ---------- MEMBERSHIP SPLIT ---------- */
-  .split-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:28px;
-    margin-top:8px;
-  }
-  @media (max-width:640px){
-    .split-grid{grid-template-columns:1fr;}
-  }
-  .split-card{
-    background:#fff;
-    border:1px solid var(--tan);
-    border-radius:14px;
-    padding:22px 20px 20px;
-  }
-  .split-card .name{
-    font-size:14px;
-    font-weight:700;
-    color:var(--ink);
-    margin-bottom:2px;
-  }
-  .split-card .count{
-    font-size:32px;
-    font-weight:900;
-    color:var(--copper-deep);
-    margin:2px 0 14px;
-  }
-  .split-card .count span{
-    font-size:15px;
-    color:var(--slate);
-    font-weight:700;
-  }
-
-  /* ---------- PACE / DEADLINE ---------- */
-  .pace-card{
-    background:#fff;
-    border:1px solid var(--tan);
-    border-radius:14px;
-    padding:26px 26px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:24px;
-    flex-wrap:wrap;
-    margin-top:4px;
-  }
-  .pace-item{text-align:center;flex:1;min-width:140px;}
-  .pace-item .val{font-size:30px;font-weight:900;color:var(--ink);}
-  .pace-item .val.good{color:#3f7d52;}
-  .pace-item .val.behind{color:#b0483f;}
-  .pace-item .lbl{
-    font-size:11px;letter-spacing:0.08em;text-transform:uppercase;
-    color:var(--slate);font-weight:700;margin-top:4px;
-  }
-  .pace-divider{width:1px;align-self:stretch;background:var(--tan);}
-  @media (max-width:640px){.pace-divider{display:none;}}
-
-  /* ---------- RESERVED MEMBERS (secondary, smaller) ---------- */
-  .reserved-section{opacity:0.94;}
-  .reserved-card{
-    background:var(--tan);
-    border-radius:14px;
-    padding:22px 26px;
-    text-align:center;
-  }
-  .reserved-count{
-    font-size:38px;
-    font-weight:900;
-    color:var(--copper-deep);
-    line-height:1;
-  }
-  .reserved-lbl{
-    font-size:11px;
-    letter-spacing:0.08em;
-    text-transform:uppercase;
-    color:var(--slate);
-    font-weight:700;
-    margin-top:4px;
-  }
-  .reserved-split{
-    display:flex;
-    justify-content:center;
-    gap:36px;
-    margin-top:18px;
-    flex-wrap:wrap;
-  }
-  .reserved-mini{text-align:center;}
-  .reserved-mini .mval{font-size:19px;font-weight:900;color:var(--ink);}
-  .reserved-mini .mlbl{
-    font-size:10px;letter-spacing:0.06em;text-transform:uppercase;
-    color:var(--slate);font-weight:700;margin-top:2px;
-  }
-
-  .download-row{
-    text-align:center;
-    padding:40px 0 8px;
-  }
-  .download-btn{
-    background:var(--ink);
-    color:var(--cream);
-    border:none;
-    font-family:'Lato',sans-serif;
-    font-weight:700;
-    font-size:14px;
-    letter-spacing:0.03em;
-    padding:14px 28px;
-    border-radius:30px;
-    cursor:pointer;
-    transition:background 0.2s;
-  }
-  .download-btn:hover{background:var(--slate);}
-
-  @media print{
-    .download-row{display:none;}
-    body{background:white;}
-    .hero{
-      background:var(--ink) !important;
-      -webkit-print-color-adjust:exact;
-      print-color-adjust:exact;
-    }
-    .split-card, .pace-card{
-      -webkit-print-color-adjust:exact;
-      print-color-adjust:exact;
-      break-inside:avoid;
-    }
-    .section{padding:28px 0 8px;}
-    footer{display:none;}
-  }
-
-  footer{
-    text-align:center;
-    font-size:12px;
-    color:var(--slate);
-    padding:36px 0 0;
-  }
-  footer a{color:var(--copper-deep);}
-
-  .updated-badge{
-    display:inline-block;
-    font-size:11px;
-    font-weight:700;
-    letter-spacing:0.05em;
-    text-transform:uppercase;
-    color:var(--slate);
-    background:var(--tan);
-    padding:5px 12px;
-    border-radius:20px;
-    margin-top:14px;
-  }
+.download-row{text-align:center;padding:12px 0 8px;}
+.download-btn{
+  background:var(--ink);
+  color:var(--cream);
+  border:none;
+  font-family:'Lato',sans-serif;
+  font-weight:700;
+  font-size:14px;
+  letter-spacing:0.03em;
+  padding:14px 28px;
+  border-radius:30px;
+  cursor:pointer;
+  transition:background 0.2s;
+}
+.download-btn:hover{background:var(--slate);}
+@media print{
+  .download-row{display:none;}
+  body{background:white;}
+  .hero{background:var(--ink) !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .split-card, .pace-card{-webkit-print-color-adjust:exact;print-color-adjust:exact;break-inside:avoid;}
+  footer{display:none;}
+}
+footer{
+  text-align:center;
+  font-size:12px;
+  color:var(--slate);
+  padding:36px 0 0;
+}
+footer a{color:var(--copper-deep);}
+.updated-badge{
+  display:inline-block;
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:0.05em;
+  text-transform:uppercase;
+  color:var(--slate);
+  background:var(--tan);
+  padding:5px 12px;
+  border-radius:20px;
+  margin-top:14px;
+}
 </style>
 </head>
 <body>
 
 <div class="hero">
-  <p class="eyebrow">City Fitness · Hoboken Maxwell Place</p>
+  <p class="eyebrow">City Fitness · Hoboken</p>
   <h1>Founding Member Countdown</h1>
-
   <div class="bignum-row">
     <span class="bignum" id="fmCount">—</span>
     <span class="bignum-of" id="fmGoal">/ 1,200</span>
   </div>
-  <p class="bignum-label">Signed Agreements Secured</p>
-
+  <p class="bignum-label">Signed Agreements Secured (Maxwell Place)</p>
   <div class="stat-strip">
     <div class="stat">
-      <div class="val" id="statConversion">Coming Soon</div>
+      <div class="val" id="statConversion">—</div>
       <div class="lbl">Deposit → Signed</div>
     </div>
     <div class="stat">
@@ -349,196 +340,155 @@
       <div class="lbl">Days To Goal Date</div>
     </div>
     <div class="stat">
-      <div class="val" id="statLeads">—</div>
-      <div class="lbl">Total HBK Leads</div>
+      <div class="val" id="statLeadsConv">—</div>
+      <div class="lbl">Signed / Total Leads</div>
     </div>
   </div>
-
   <div class="updated-badge" id="lastUpdated">Loading live data…</div>
 </div>
 
 <div class="wrap">
+  <div class="clubs-grid">
 
-  <div class="section">
-    <p class="section-title">Overall Progress</p>
-    <div class="gauge-block">
-      <div class="gauge-caption">
-        <span class="name">To 1,200 Signed Agreements</span>
-      </div>
-      <div class="main-count" id="mainCount">— <span id="mainPct"></span></div>
-      <svg class="gauge" viewBox="0 0 600 100" id="mainGauge">
-        <defs>
-          <linearGradient id="gradMain" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stop-color="#F3BE87"/>
-            <stop offset="100%" stop-color="#AE7C58"/>
-          </linearGradient>
-          <clipPath id="clipMain">
-            <rect x="0" y="30" width="16" height="40" rx="2"/>
-            <rect x="20" y="19" width="12" height="62" rx="2"/>
-            <rect x="36" y="6" width="26" height="88" rx="3"/>
-            <rect x="62" y="42" width="476" height="16"/>
-            <rect x="538" y="6" width="26" height="88" rx="3"/>
-            <rect x="568" y="19" width="12" height="62" rx="2"/>
-            <rect x="584" y="30" width="16" height="40" rx="2"/>
-          </clipPath>
-        </defs>
-        <!-- track -->
-        <g class="track">
-          <rect x="0" y="30" width="16" height="40" rx="2"/>
-          <rect x="20" y="19" width="12" height="62" rx="2"/>
-          <rect x="36" y="6" width="26" height="88" rx="3"/>
-          <rect x="62" y="42" width="476" height="16"/>
-          <rect x="538" y="6" width="26" height="88" rx="3"/>
-          <rect x="568" y="19" width="12" height="62" rx="2"/>
-          <rect x="584" y="30" width="16" height="40" rx="2"/>
-        </g>
-        <!-- fill, clipped to dumbbell shape -->
-        <rect class="fillbar" id="mainFill" x="0" y="0" width="0" height="100" fill="url(#gradMain)" clip-path="url(#clipMain)"/>
-      </svg>
-    </div>
-  </div>
-
-  <div class="section">
-    <p class="section-title">Membership Type Split (Signed)</p>
-    <div class="split-grid">
-
-      <div class="split-card">
-        <div class="name">Performance+</div>
-        <div class="count" id="pCount">— <span id="pPct"></span></div>
-        <svg class="gauge" viewBox="0 0 300 60" id="gaugeP">
-          <defs>
-            <clipPath id="clipP">
-              <rect x="0" y="18" width="10" height="24" rx="1"/>
-              <rect x="12" y="11" width="8" height="38" rx="1"/>
-              <rect x="22" y="4" width="16" height="52" rx="2"/>
-              <rect x="38" y="25" width="224" height="10"/>
-              <rect x="262" y="4" width="16" height="52" rx="2"/>
-              <rect x="280" y="11" width="8" height="38" rx="1"/>
-              <rect x="290" y="18" width="10" height="24" rx="1"/>
-            </clipPath>
-          </defs>
-          <g class="track">
-            <rect x="0" y="18" width="10" height="24" rx="1"/>
-            <rect x="12" y="11" width="8" height="38" rx="1"/>
-            <rect x="22" y="4" width="16" height="52" rx="2"/>
-            <rect x="38" y="25" width="224" height="10"/>
-            <rect x="262" y="4" width="16" height="52" rx="2"/>
-            <rect x="280" y="11" width="8" height="38" rx="1"/>
-            <rect x="290" y="18" width="10" height="24" rx="1"/>
-          </g>
-          <rect class="fillbar" id="fillP" x="0" y="0" width="0" height="60" fill="url(#gradMain)" clip-path="url(#clipP)"/>
-        </svg>
+    <!-- ================= MAXWELL PLACE (LEFT, ACTIVE) ================= -->
+    <div class="maxwell-col">
+      <div class="club-header">
+        <h2>Maxwell Place</h2>
+        <span class="club-tag">Presale Open</span>
       </div>
 
-      <div class="split-card">
-        <div class="name">Studio+</div>
-        <div class="count" id="sCount">— <span id="sPct"></span></div>
-        <svg class="gauge" viewBox="0 0 300 60" id="gaugeS">
-          <defs>
-            <clipPath id="clipS">
-              <rect x="0" y="18" width="10" height="24" rx="1"/>
-              <rect x="12" y="11" width="8" height="38" rx="1"/>
-              <rect x="22" y="4" width="16" height="52" rx="2"/>
-              <rect x="38" y="25" width="224" height="10"/>
-              <rect x="262" y="4" width="16" height="52" rx="2"/>
-              <rect x="280" y="11" width="8" height="38" rx="1"/>
-              <rect x="290" y="18" width="10" height="24" rx="1"/>
-            </clipPath>
-          </defs>
-          <g class="track">
-            <rect x="0" y="18" width="10" height="24" rx="1"/>
-            <rect x="12" y="11" width="8" height="38" rx="1"/>
-            <rect x="22" y="4" width="16" height="52" rx="2"/>
-            <rect x="38" y="25" width="224" height="10"/>
-            <rect x="262" y="4" width="16" height="52" rx="2"/>
-            <rect x="280" y="11" width="8" height="38" rx="1"/>
-            <rect x="290" y="18" width="10" height="24" rx="1"/>
-          </g>
-          <rect class="fillbar" id="fillS" x="0" y="0" width="0" height="60" fill="url(#gradMain)" clip-path="url(#clipS)"/>
-        </svg>
-      </div>
-
-      <div class="split-card">
-        <div class="name">Neighborhood</div>
-        <div class="count" id="nCount">— <span id="nPct"></span></div>
-        <svg class="gauge" viewBox="0 0 300 60" id="gaugeN">
-          <defs>
-            <clipPath id="clipN">
-              <rect x="0" y="18" width="10" height="24" rx="1"/>
-              <rect x="12" y="11" width="8" height="38" rx="1"/>
-              <rect x="22" y="4" width="16" height="52" rx="2"/>
-              <rect x="38" y="25" width="224" height="10"/>
-              <rect x="262" y="4" width="16" height="52" rx="2"/>
-              <rect x="280" y="11" width="8" height="38" rx="1"/>
-              <rect x="290" y="18" width="10" height="24" rx="1"/>
-            </clipPath>
-          </defs>
-          <g class="track">
-            <rect x="0" y="18" width="10" height="24" rx="1"/>
-            <rect x="12" y="11" width="8" height="38" rx="1"/>
-            <rect x="22" y="4" width="16" height="52" rx="2"/>
-            <rect x="38" y="25" width="224" height="10"/>
-            <rect x="262" y="4" width="16" height="52" rx="2"/>
-            <rect x="280" y="11" width="8" height="38" rx="1"/>
-            <rect x="290" y="18" width="10" height="24" rx="1"/>
-          </g>
-          <rect class="fillbar" id="fillN" x="0" y="0" width="0" height="60" fill="url(#gradMain)" clip-path="url(#clipN)"/>
-        </svg>
-      </div>
-
-    </div>
-  </div>
-
-  <div class="section">
-    <p class="section-title">Pace Check</p>
-    <div class="pace-card">
-      <div class="pace-item">
-        <div class="val" id="paceNeeded">—</div>
-        <div class="lbl">Members Needed / Day</div>
-      </div>
-      <div class="pace-divider"></div>
-      <div class="pace-item">
-        <div class="val" id="paceActual">—</div>
-        <div class="lbl">Actual Pace So Far</div>
-      </div>
-      <div class="pace-divider"></div>
-      <div class="pace-item">
-        <div class="val" id="paceStatus">—</div>
-        <div class="lbl">On Track?</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="section reserved-section">
-    <p class="section-title">Reserved Members &mdash; Launched 7/6/2026</p>
-    <div class="reserved-card">
-      <div class="reserved-count" id="reservedCount">&mdash;</div>
-      <div class="reserved-lbl">$1 Deposits (Locked)</div>
-      <div class="reserved-split">
-        <div class="reserved-mini">
-          <div class="mval" id="rPCount">&mdash;</div>
-          <div class="mlbl">Performance+</div>
+      <div class="section">
+        <p class="section-title">Overall Progress</p>
+        <div class="gauge-block">
+          <div class="main-count" id="mxMainCount">— <span id="mxMainPct"></span></div>
+          <svg class="gauge" viewBox="0 0 600 100" id="mxGauge">
+            <defs>
+              <linearGradient id="gradMx" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="#F3BE87"/>
+                <stop offset="100%" stop-color="#AE7C58"/>
+              </linearGradient>
+              <clipPath id="clipMx">
+                <rect x="0" y="30" width="16" height="40" rx="2"/>
+                <rect x="20" y="19" width="12" height="62" rx="2"/>
+                <rect x="36" y="6" width="26" height="88" rx="3"/>
+                <rect x="62" y="42" width="476" height="16"/>
+                <rect x="538" y="6" width="26" height="88" rx="3"/>
+                <rect x="568" y="19" width="12" height="62" rx="2"/>
+                <rect x="584" y="30" width="16" height="40" rx="2"/>
+              </clipPath>
+            </defs>
+            <g class="track">
+              <rect x="0" y="30" width="16" height="40" rx="2"/>
+              <rect x="20" y="19" width="12" height="62" rx="2"/>
+              <rect x="36" y="6" width="26" height="88" rx="3"/>
+              <rect x="62" y="42" width="476" height="16"/>
+              <rect x="538" y="6" width="26" height="88" rx="3"/>
+              <rect x="568" y="19" width="12" height="62" rx="2"/>
+              <rect x="584" y="30" width="16" height="40" rx="2"/>
+            </g>
+            <rect class="fillbar" id="mxFill" x="0" y="0" width="0" height="100" fill="url(#gradMx)" clip-path="url(#clipMx)"/>
+          </svg>
         </div>
-        <div class="reserved-mini">
-          <div class="mval" id="rSCount">&mdash;</div>
-          <div class="mlbl">Studio+</div>
+      </div>
+
+      <div class="section">
+        <p class="section-title">Membership Type Split (Signed)</p>
+        <div class="split-grid">
+          <div class="split-card">
+            <div class="name">Performance+</div>
+            <div class="count" id="mxPCount">— <span id="mxPPct"></span></div>
+          </div>
+          <div class="split-card">
+            <div class="name">Studio+</div>
+            <div class="count" id="mxSCount">— <span id="mxSPct"></span></div>
+          </div>
+          <div class="split-card">
+            <div class="name">Neighborhood</div>
+            <div class="count" id="mxNCount">— <span id="mxNPct"></span></div>
+          </div>
         </div>
-        <div class="reserved-mini">
-          <div class="mval" id="rNCount">&mdash;</div>
-          <div class="mlbl">Neighborhood</div>
+      </div>
+
+      <div class="section">
+        <p class="section-title">Pace Check</p>
+        <div class="pace-card">
+          <div class="pace-item">
+            <div class="val" id="mxPaceNeeded">—</div>
+            <div class="lbl">Needed / Day</div>
+          </div>
+          <div class="pace-divider"></div>
+          <div class="pace-item">
+            <div class="val" id="mxPaceActual">—</div>
+            <div class="lbl">Actual Pace</div>
+          </div>
+          <div class="pace-divider"></div>
+          <div class="pace-item">
+            <div class="val" id="mxPaceStatus">—</div>
+            <div class="lbl">On Track?</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section" style="padding-bottom:0;">
+        <p class="section-title">Reserved Members — $1 Deposits</p>
+        <div class="reserved-card">
+          <div class="reserved-count" id="mxReservedCount">—</div>
+          <div class="reserved-lbl">Locked Deposits</div>
+          <div class="reserved-split">
+            <div class="reserved-mini"><div class="mval" id="mxRPCount">—</div><div class="mlbl">Performance+</div></div>
+            <div class="reserved-mini"><div class="mval" id="mxRSCount">—</div><div class="mlbl">Studio+</div></div>
+            <div class="reserved-mini"><div class="mval" id="mxRNCount">—</div><div class="mlbl">Neighborhood</div></div>
+          </div>
         </div>
       </div>
     </div>
+
+    <!-- ================= SOUTHEND (RIGHT, PLACEHOLDER) ================= -->
+    <div class="southend-col">
+      <div class="club-header">
+        <h2>Southend</h2>
+        <span class="coming-soon-flag">Coming Soon</span>
+      </div>
+
+      <div class="section">
+        <p class="section-title">Overall Progress</p>
+        <div class="main-count" id="seMainCount">—</div>
+      </div>
+
+      <div class="section">
+        <p class="section-title">Membership Type Split</p>
+        <div class="split-grid">
+          <div class="split-card"><div class="name">Performance+</div><div class="count">—</div></div>
+          <div class="split-card"><div class="name">Studio+</div><div class="count">—</div></div>
+          <div class="split-card"><div class="name">Neighborhood</div><div class="count">—</div></div>
+        </div>
+      </div>
+
+      <div class="section">
+        <p class="section-title">Pace Check</p>
+        <div class="pace-card">
+          <div class="pace-item"><div class="val">—</div><div class="lbl">Needed / Day</div></div>
+          <div class="pace-divider"></div>
+          <div class="pace-item"><div class="val">—</div><div class="lbl">Actual Pace</div></div>
+        </div>
+      </div>
+
+      <div class="section" style="padding-bottom:0;">
+        <p class="section-title">Reserved Members</p>
+        <div class="reserved-card">
+          <div class="reserved-count">—</div>
+          <div class="reserved-lbl">Presale not yet open</div>
+        </div>
+      </div>
+    </div>
+
   </div>
 
   <div class="download-row">
     <button class="download-btn" onclick="window.print()">Download Snapshot (PDF)</button>
   </div>
 
-  <footer>
-    Numbers reflect the last manual update to the team's tracker.
-  </footer>
-
+  <footer>Numbers reflect the last manual update to the team's tracker.</footer>
 </div>
 
 <script>
@@ -546,72 +496,50 @@
    GOAL / DEADLINE — only change these if the campaign target
    or end date itself changes. Day-to-day number updates happen
    in stats.js, not here.
-   ============================================================ */
-const GOAL = 1200;
-const RESERVED_ACTUAL = 725; // corrected reserved-member count (excludes failed $1 payments) — used only for the Deposit → Signed conversion stat
-const DEADLINE = "2026-09-24T23:59:59";
+============================================================ */
+const GOAL = 1200; // Maxwell Place goal
+const DEADLINE = "2026-10-07T23:59:59";
 const CAMPAIGN_START = "2026-07-06T00:00:00"; // date founding member form opened
 
 /* ============================================================
    LOGIC — no need to edit below this line
-   ============================================================ */
-
+============================================================ */
 function fmtNum(n){ return Number(n).toLocaleString("en-US"); }
 
 function render(stats){
-  const fm = Number(stats["Signed Agreements"]) || 0;
-  const leads = Number(stats["Total HBK Leads"]) || 0;
-  const p = Number(stats["Signed Performance+"]) || 0;
-  const s = Number(stats["Signed Studio+"]) || 0;
-  const n = Number(stats["Signed Neighborhood"]) || 0;
+  const mx = stats["Maxwell"] || {};
+  const se = stats["Southend"] || {};
+
+  const fm = Number(mx["Signed Agreements"]) || 0;
+  const p = Number(mx["Signed Performance+"]) || 0;
+  const s = Number(mx["Signed Studio+"]) || 0;
+  const n = Number(mx["Signed Neighborhood"]) || 0;
+  const reservedTotal = Number(mx["Reserved Members"]) || 0;
+  const depositSigned = Number(mx["Deposit Signed Count"]) || 0;
+  const mxLeads = Number(mx["Total Leads"]) || 0;
+
+  const seFm = Number(se["Signed Agreements"]) || 0;
+  const seLeads = Number(se["Total Leads"]) || 0;
 
   const pctOfGoal = Math.min(100, (fm / GOAL) * 100);
 
-  // Deposit → Signed: of the RESERVED_ACTUAL (725) people who put down
-  // the $1 deposit, how many have since signed an agreement.
-  const depositSigned = Number(stats["Deposit Signed Count"]) || 0;
-  const depositSignedPct = RESERVED_ACTUAL > 0 ? (depositSigned / RESERVED_ACTUAL * 100) : 0;
-  document.getElementById("statConversion").innerHTML =
-    fmtNum(depositSigned) + " / " + fmtNum(RESERVED_ACTUAL) + " <span style='font-size:0.6em;'>(" + depositSignedPct.toFixed(0) + "%)</span>";
-
+  // ---- Hero ----
   document.getElementById("fmCount").textContent = fmtNum(fm);
   document.getElementById("fmGoal").textContent = "/ " + fmtNum(GOAL);
-  document.getElementById("statLeads").textContent = fmtNum(leads);
-  document.getElementById("mainCount").innerHTML = fmtNum(fm) + " / " + fmtNum(GOAL) + " <span>(" + pctOfGoal.toFixed(0) + "%)</span>";
 
-  // main dumbbell fill: viewBox width 600
-  document.getElementById("mainFill").setAttribute("width", (pctOfGoal/100*600).toFixed(1));
+  const depositSignedPct = reservedTotal > 0 ? (depositSigned / reservedTotal * 100) : 0;
+  document.getElementById("statConversion").innerHTML =
+    fmtNum(depositSigned) + " / " + fmtNum(reservedTotal) + " <span style='font-size:0.6em;'>(" + depositSignedPct.toFixed(0) + "%)</span>";
 
-  // membership split (signed)
-  const total = p + s + n;
-  const pPct = total ? (p/total*100) : 0;
-  const sPct = total ? (s/total*100) : 0;
-  const nPct = total ? (n/total*100) : 0;
+  // Signed / Total Leads — combined across both clubs so this stat is
+  // ready the moment Southend has its own leads flowing in.
+  const combinedSigned = fm + seFm;
+  const combinedLeads = mxLeads + seLeads;
+  const leadsConvPct = combinedLeads > 0 ? (combinedSigned / combinedLeads * 100) : 0;
+  document.getElementById("statLeadsConv").innerHTML =
+    fmtNum(combinedSigned) + " / " + fmtNum(combinedLeads) + " <span style='font-size:0.6em;'>(" + leadsConvPct.toFixed(0) + "%)</span>";
 
-  document.getElementById("pCount").innerHTML = fmtNum(p) + " <span>(" + pPct.toFixed(0) + "%)</span>";
-  document.getElementById("sCount").innerHTML = fmtNum(s) + " <span>(" + sPct.toFixed(0) + "%)</span>";
-  document.getElementById("nCount").innerHTML = fmtNum(n) + " <span>(" + nPct.toFixed(0) + "%)</span>";
-
-  document.getElementById("fillP").setAttribute("width", (pPct/100*300).toFixed(1));
-  document.getElementById("fillS").setAttribute("width", (sPct/100*300).toFixed(1));
-  document.getElementById("fillN").setAttribute("width", (nPct/100*300).toFixed(1));
-
-  // ---- Reserved Members (secondary, locked $1-deposit data) ----
-  const rm = Number(stats["Reserved Members"]) || 0;
-  const rp = Number(stats["Reserved Performance+"]) || 0;
-  const rs = Number(stats["Reserved Studio+"]) || 0;
-  const rn = Number(stats["Reserved Neighborhood"]) || 0;
-  const rTotal = rp + rs + rn;
-  const rpPct = rTotal ? (rp/rTotal*100) : 0;
-  const rsPct = rTotal ? (rs/rTotal*100) : 0;
-  const rnPct = rTotal ? (rn/rTotal*100) : 0;
-
-  document.getElementById("reservedCount").textContent = fmtNum(rm);
-  document.getElementById("rPCount").innerHTML = fmtNum(rp) + " (" + rpPct.toFixed(0) + "%)";
-  document.getElementById("rSCount").innerHTML = fmtNum(rs) + " (" + rsPct.toFixed(0) + "%)";
-  document.getElementById("rNCount").innerHTML = fmtNum(rn) + " (" + rnPct.toFixed(0) + "%)";
-
-  // days remaining
+  // days remaining (shared deadline for now — Maxwell's)
   const now = new Date();
   const deadline = new Date(DEADLINE);
   const start = new Date(CAMPAIGN_START);
@@ -619,15 +547,26 @@ function render(stats){
   const daysElapsed = Math.max(1, Math.ceil((now - start) / 86400000));
   document.getElementById("statDays").textContent = daysLeft;
 
-  // pace
+  // ---- Maxwell: main gauge ----
+  document.getElementById("mxMainCount").innerHTML = fmtNum(fm) + " / " + fmtNum(GOAL) + " <span>(" + pctOfGoal.toFixed(0) + "%)</span>";
+  document.getElementById("mxFill").setAttribute("width", (pctOfGoal/100*600).toFixed(1));
+
+  // ---- Maxwell: membership split ----
+  const total = p + s + n;
+  const pPct = total ? (p/total*100) : 0;
+  const sPct = total ? (s/total*100) : 0;
+  const nPct = total ? (n/total*100) : 0;
+  document.getElementById("mxPCount").innerHTML = fmtNum(p) + " <span>(" + pPct.toFixed(0) + "%)</span>";
+  document.getElementById("mxSCount").innerHTML = fmtNum(s) + " <span>(" + sPct.toFixed(0) + "%)</span>";
+  document.getElementById("mxNCount").innerHTML = fmtNum(n) + " <span>(" + nPct.toFixed(0) + "%)</span>";
+
+  // ---- Maxwell: pace ----
   const remaining = Math.max(0, GOAL - fm);
   const neededPerDay = daysLeft > 0 ? (remaining / daysLeft) : remaining;
   const actualPerDay = fm / daysElapsed;
-
-  document.getElementById("paceNeeded").textContent = neededPerDay.toFixed(1);
-  document.getElementById("paceActual").textContent = actualPerDay.toFixed(1);
-
-  const statusEl = document.getElementById("paceStatus");
+  document.getElementById("mxPaceNeeded").textContent = neededPerDay.toFixed(1);
+  document.getElementById("mxPaceActual").textContent = actualPerDay.toFixed(1);
+  const statusEl = document.getElementById("mxPaceStatus");
   if(actualPerDay >= neededPerDay){
     statusEl.textContent = "Ahead";
     statusEl.className = "val good";
@@ -635,6 +574,15 @@ function render(stats){
     statusEl.textContent = "Behind";
     statusEl.className = "val behind";
   }
+
+  // ---- Maxwell: reserved members ----
+  const rp = Number(mx["Reserved Performance+"]) || 0;
+  const rs = Number(mx["Reserved Studio+"]) || 0;
+  const rn = Number(mx["Reserved Neighborhood"]) || 0;
+  document.getElementById("mxReservedCount").textContent = fmtNum(reservedTotal);
+  document.getElementById("mxRPCount").textContent = fmtNum(rp);
+  document.getElementById("mxRSCount").textContent = fmtNum(rs);
+  document.getElementById("mxRNCount").textContent = fmtNum(rn);
 
   const lastUpdatedText = stats["Last Updated"];
   document.getElementById("lastUpdated").textContent =
@@ -652,9 +600,7 @@ function loadStats(){
   };
   document.body.appendChild(script);
 }
-
 loadStats();
 </script>
-
 </body>
 </html>
