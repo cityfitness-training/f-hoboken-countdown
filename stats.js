@@ -12,8 +12,8 @@ const STATS = {
   "Last Updated": "September 27, 7:30AM",
 
   "Maxwell": {
-    "Signed Agreements": 987,
-    "Signed Performance+": 402,
+    "Signed Agreements": 988,
+    "Signed Performance+": 403,
     "Signed Studio+": 335,
     "Signed Neighborhood": 254,
     "Deposit Signed Count": 481,
