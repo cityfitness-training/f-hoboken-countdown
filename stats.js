@@ -9,22 +9,22 @@
 // sum of the three above it — type in whatever your tracker shows.
 // ============================================================
 const STATS = {
-  "Last Updated": "September 28, 10:00PM",
+  "Last Updated": "September 29, 8:30PM",
 
   "Maxwell": {
-    "Signed Agreements": 1050,
-    "Signed Performance+": 429,
-    "Signed Studio+": 354,
-    "Signed Neighborhood": 267,
-    "Deposit Signed Count": 483,
+    "Signed Agreements": 1077,
+    "Signed Performance+": 437,
+    "Signed Studio+": 366,
+    "Signed Neighborhood": 274,
+    "Deposit Signed Count": 487,
     "Reserved Members": 725,
-    "Total Leads": 2261,
+    "Total Leads": 2320,
 
-    "EFT Performance+": 42685.50,
-    "EFT Studio+": 30975.00,
-    "EFT Neighborhood": 19871.50,
-    "Total Expected EFT": 93552.00,
-    "Avg Ticket Price": 89.10
+    "EFT Performance+": 43481.50,
+    "EFT Studio+": 32025.00,
+    "EFT Neighborhood": 20413.00,
+    "Total Expected EFT": 95919.50,
+    "Avg Ticket Price": 89.06
   },
 
   "Southend": {
