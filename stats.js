@@ -12,19 +12,19 @@ const STATS = {
   "Last Updated": "October 4, 9:30AM",
 
   "Maxwell": {
-    "Signed Agreements": 1195,
-    "Signed Performance+": 475,
-    "Signed Studio+": 412,
-    "Signed Neighborhood": 308,
+    "Signed Agreements": 1245,
+    "Signed Performance+": 486,
+    "Signed Studio+": 427,
+    "Signed Neighborhood": 332,
     "Deposit Signed Count": 507,
     "Reserved Members": 725,
-    "Total Leads": 2505,
+    "Total Leads": 2596,
 
-    "EFT Performance+": 48541.00,
-    "EFT Studio+": 37054.50,
-    "EFT Neighborhood": 23595.00,
-    "Total Expected EFT": 109190.50,
-    "Avg Ticket Price": 91.37
+    "EFT Performance+": 49635.50,
+    "EFT Studio+": 38637.00,
+    "EFT Neighborhood": 25383.00,
+    "Total Expected EFT": 113385.50,
+    "Avg Ticket Price": 91.07
   },
 
   "Southend": {
