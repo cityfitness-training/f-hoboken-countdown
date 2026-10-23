@@ -50,12 +50,12 @@ const STATS = {
     "Campaign Start": "2026-10-18",
     "Status Label": "Presale Open",
 
-    "Signed Agreements": 23,
-    "Signed Performance+": 10,
-    "Signed Studio+": 6,
-    "Signed Neighborhood": 7,
+    "Signed Agreements": 39,
+    "Signed Performance+": 19,
+    "Signed Studio+": 8,
+    "Signed Neighborhood": 12,
     "Deposit Signed Count": 0,
     "Reserved Members": 0,
-    "Total Leads": 498
+    "Total Leads": 599
   }
 };
