@@ -21,7 +21,7 @@
 // IMPORTANT: never put commas inside numbers (write 38705.50, not 38,705.50).
 // ============================================================
 const STATS = {
-  "Last Updated": "October 19, 9:30AM",
+  "Last Updated": "October 23, 9:30AM",
 
   "Maxwell": {
     "Goal": 1200,
@@ -29,19 +29,19 @@ const STATS = {
     "Campaign Start": "2026-07-06",
     "Status Label": "Presale Open",
 
-    "Signed Agreements": 1398,
-    "Signed Performance+": 524,
-    "Signed Studio+": 483,
-    "Signed Neighborhood": 391,
+    "Signed Agreements": 1482,
+    "Signed Performance+": 538,
+    "Signed Studio+": 517,
+    "Signed Neighborhood": 427,
     "Deposit Signed Count": 507,
     "Reserved Members": 725,
-    "Total Leads": 3184,
+    "Total Leads": 3365,
 
     "EFT Performance+": 53416.50,
     "EFT Studio+": 43267.00,
     "EFT Neighborhood": 29629.50,
-    "Total Expected EFT": 126313.00,
-    "Avg Ticket Price": 90.46
+    "Total Expected EFT": 133512.00,
+    "Avg Ticket Price": 90.09
   },
 
   "Southend": {
