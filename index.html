@@ -9,8 +9,8 @@
 <style>
 /* ============================================================
    This page reads its numbers from stats.js (a separate small
-   file sitting next to this one). To update the numbers, goals
-   or dates, edit stats.js — never edit this file.
+   file sitting next to this one). To update the numbers, goals,
+   dates or the month name, edit stats.js, never this file.
 ============================================================ */
 :root{
   --ink:#231F20;
@@ -96,6 +96,34 @@ body{
 .club-tab:focus-visible{outline:3px solid var(--copper-light);outline-offset:3px;}
 .club-tab[aria-selected="true"]:focus-visible{outline-color:var(--cream);}
 
+/* ---------- TOTAL / MONTH TOGGLE (second, smaller) ---------- */
+.view-tabs{
+  display:inline-flex;
+  gap:4px;
+  margin-top:14px;
+  padding:4px;
+  border:1px solid rgba(228,199,170,0.3);
+  border-radius:999px;
+}
+.view-tabs[hidden]{display:none;}
+.view-tab{
+  appearance:none;
+  font-family:'Lato',sans-serif;
+  font-size:14px;
+  font-weight:700;
+  color:var(--tan);
+  background:transparent;
+  border:0;
+  border-radius:999px;
+  padding:8px 24px;
+  min-width:130px;
+  cursor:pointer;
+  transition:background .18s ease, color .18s ease;
+}
+.view-tab:hover{background:rgba(228,199,170,0.12);}
+.view-tab[aria-selected="true"]{background:var(--tan);color:var(--ink);}
+.view-tab:focus-visible{outline:3px solid var(--copper-light);outline-offset:2px;}
+
 .print-club{display:none;font-size:15px;font-weight:700;color:var(--copper-light);margin:18px 0 0;}
 
 /* ---------- HERO NUMBERS ---------- */
@@ -176,6 +204,11 @@ body{
   font-size:11px;font-weight:700;letter-spacing:0.08em;
   text-transform:uppercase;color:var(--copper-deep);
 }
+.month-note{
+  background:#fff;border:1px dashed var(--tan);border-radius:12px;
+  padding:14px 18px;margin:0 0 28px;font-size:14px;color:var(--slate);
+}
+.month-note[hidden]{display:none;}
 .section{padding:0 0 40px;}
 .section[hidden]{display:none;}
 .section-title{
@@ -207,26 +240,6 @@ svg.gauge[hidden]{display:none;}
 .split-card .count{font-size:26px;font-weight:900;color:var(--copper-deep);margin:2px 0 0;}
 .split-card .count span{font-size:14px;color:var(--slate);font-weight:700;}
 
-/* ---------- EFT COLLECTED ---------- */
-.eft-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:16px;}
-@media (max-width:640px){.eft-grid{grid-template-columns:1fr;}}
-.eft-card{
-  background:#fff;border:1px solid var(--tan);border-radius:14px;
-  padding:18px 18px 16px;text-align:center;
-}
-.eft-card .name{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:8px;}
-.eft-card .amt{font-size:24px;font-weight:900;color:var(--copper-deep);}
-.eft-summary-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
-.eft-summary-card{
-  background:var(--ink);color:var(--cream);border-radius:14px;
-  padding:18px 18px 16px;text-align:center;
-}
-.eft-summary-card .name{
-  font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;
-  color:var(--tan);margin-bottom:8px;
-}
-.eft-summary-card .amt{font-size:26px;font-weight:900;color:var(--copper-light);}
-
 /* ---------- PACE ---------- */
 .pace-card{
   background:#fff;border:1px solid var(--tan);border-radius:14px;padding:22px;
@@ -257,13 +270,15 @@ footer{text-align:center;font-size:12px;color:var(--slate);padding:36px 0 0;}
 @media (max-width:520px){
   .club-tabs{display:flex;width:100%;}
   .club-tab{flex:1;min-width:0;padding:12px 10px 11px;}
+  .view-tabs{display:flex;width:100%;}
+  .view-tab{flex:1;min-width:0;padding:8px 10px;}
   .stat-strip{gap:28px;}
 }
 @media (prefers-reduced-motion:reduce){
-  .hero-stats,.panel,.fillbar,.club-tab{transition:none;}
+  .hero-stats,.panel,.fillbar,.club-tab,.view-tab{transition:none;}
 }
 @media print{
-  .download-row,.club-tabs,footer{display:none;}
+  .download-row,.club-tabs,.view-tabs,footer{display:none;}
   .print-club{display:block;}
   body{background:white;}
   .hero{background:var(--ink) !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
@@ -287,6 +302,13 @@ footer{text-align:center;font-size:12px;color:var(--slate);padding:36px 0 0;}
       <span class="tab-count" id="tabCount-Southend">—</span>
     </button>
   </div>
+
+  <div>
+    <div class="view-tabs" id="viewTabs" role="tablist" aria-label="Choose total count or the current month" hidden>
+      <button class="view-tab" role="tab" id="vtab-total" data-view="total" aria-selected="true" aria-controls="panel" tabindex="0">Total Count</button>
+      <button class="view-tab" role="tab" id="vtab-month" data-view="month" aria-selected="false" aria-controls="panel" tabindex="-1"><span id="monthBtnLabel">This Month</span></button>
+    </div>
+  </div>
   <p class="print-club" id="printClub"></p>
 
   <div class="hero-stats" id="heroStats">
@@ -294,7 +316,7 @@ footer{text-align:center;font-size:12px;color:var(--slate);padding:36px 0 0;}
       <span class="bignum" id="fmCount">—</span>
       <span class="bignum-of" id="fmGoal"></span>
     </div>
-    <p class="bignum-label">Signed Agreements</p>
+    <p class="bignum-label" id="bignumLabel">Signed Agreements</p>
     <div class="stat-strip">
       <div class="stat" id="statConversionBox">
         <div class="val" id="statConversion">—</div>
@@ -302,7 +324,7 @@ footer{text-align:center;font-size:12px;color:var(--slate);padding:36px 0 0;}
       </div>
       <div class="stat" id="statDaysBox">
         <div class="val" id="statDays">—</div>
-        <div class="lbl">Days To Goal Date</div>
+        <div class="lbl" id="statDaysLbl">Days To Goal Date</div>
       </div>
       <div class="stat" id="statLeadsBox">
         <div class="val" id="statLeadsConv">—</div>
@@ -320,8 +342,10 @@ footer{text-align:center;font-size:12px;color:var(--slate);padding:36px 0 0;}
       <span class="club-tag" id="panelTag">Presale Open</span>
     </div>
 
+    <p class="month-note" id="monthNote" hidden></p>
+
     <div class="section">
-      <p class="section-title">Overall Progress</p>
+      <p class="section-title" id="titleProgress">Overall Progress</p>
       <div class="main-count" id="mainCount">—</div>
       <p class="goal-note" id="goalNote" hidden>Goal not set yet for this club.</p>
       <svg class="gauge" viewBox="0 0 600 100" id="gauge">
@@ -354,7 +378,7 @@ footer{text-align:center;font-size:12px;color:var(--slate);padding:36px 0 0;}
     </div>
 
     <div class="section">
-      <p class="section-title">Membership Type Split (Signed)</p>
+      <p class="section-title" id="titleSplit">Membership Type Split (Signed)</p>
       <div class="split-grid">
         <div class="split-card"><div class="name">Performance+</div><div class="count" id="pCount">—</div></div>
         <div class="split-card"><div class="name">Studio+</div><div class="count" id="sCount">—</div></div>
@@ -362,20 +386,7 @@ footer{text-align:center;font-size:12px;color:var(--slate);padding:36px 0 0;}
       </div>
     </div>
 
-    <div class="section" id="eftSection" hidden>
-      <p class="section-title">EFT Collected</p>
-      <div class="eft-grid">
-        <div class="eft-card"><div class="name">Performance+ EFT</div><div class="amt" id="eftP">—</div></div>
-        <div class="eft-card"><div class="name">Studio+ EFT</div><div class="amt" id="eftS">—</div></div>
-        <div class="eft-card"><div class="name">Neighborhood EFT</div><div class="amt" id="eftN">—</div></div>
-      </div>
-      <div class="eft-summary-grid">
-        <div class="eft-summary-card"><div class="name">Total Expected EFT</div><div class="amt" id="eftTotal">—</div></div>
-        <div class="eft-summary-card"><div class="name">Avg. Ticket Price</div><div class="amt" id="eftAvg">—</div></div>
-      </div>
-    </div>
-
-    <div class="section" style="padding-bottom:0;">
+    <div class="section" id="paceSection" style="padding-bottom:0;">
       <p class="section-title">Pace Check</p>
       <div class="pace-card">
         <div class="pace-item"><div class="val" id="paceNeeded">—</div><div class="lbl">Needed / Day</div></div>
@@ -397,9 +408,9 @@ footer{text-align:center;font-size:12px;color:var(--slate);padding:36px 0 0;}
 
 <script>
 /* ============================================================
-   Goals, goal dates and campaign start dates live in stats.js
-   (one set per club). The values below are only a fallback for
-   Maxwell Place if stats.js doesn't have them.
+   Goals, goal dates, campaign starts and the month name all live
+   in stats.js. The values below are only a fallback for Maxwell
+   Place if stats.js doesn't have them.
 ============================================================ */
 const CLUBS = [
   { key: "Maxwell",  label: "Maxwell Place" },
@@ -413,26 +424,34 @@ const FALLBACK = {
    LOGIC — no need to edit below this line
 ============================================================ */
 const DAY = 86400000;
+const MONTHS = ["january","february","march","april","may","june","july","august","september","october","november","december"];
 let currentClub = "Maxwell";
+let currentView = "total";
 let statsData = null;
 
+const $ = id => document.getElementById(id);
 function fmtNum(n){ return Number(n).toLocaleString("en-US"); }
-function fmtMoney(v){
-  return (v === undefined || v === null || v === "")
-    ? "—"
-    : "$" + Number(v).toLocaleString("en-US", {minimumFractionDigits:2, maximumFractionDigits:2});
-}
+function has(v){ return v !== undefined && v !== null && v !== ""; }
 function clubCfg(club){ return Object.assign({}, FALLBACK[club] || {}, (statsData && statsData[club]) || {}); }
+function supportsMonth(club){ const m = clubCfg(club).Month; return !!(m && typeof m === "object"); }
+function monthLabel(){ return (statsData && statsData["Month Label"]) || "This Month"; }
 function parseDate(str, endOfDay){
   if(!str) return null;
   const d = new Date(str + (endOfDay ? "T23:59:59" : "T00:00:00"));
   return isNaN(d) ? null : d;
 }
+function showGauge(show){ $("gauge").style.display = show ? "" : "none"; }   // (an <svg> ignores the "hidden" attribute)
 function pctSpan(p){ return " <span>(" + p.toFixed(0) + "%)</span>"; }
 
-function render(club){
-  const c = clubCfg(club);
+function render(club, view){
+  const base = clubCfg(club);
+  const isMonth = view === "month" && supportsMonth(club);
+  const c = isMonth ? Object.assign({}, base.Month) : base;
   const meta = CLUBS.find(x => x.key === club);
+  const mLabel = monthLabel();
+  const now = new Date();
+
+  const entered = has(c["Signed Agreements"]);          // month view: false until you type the number
   const signed = Number(c["Signed Agreements"]) || 0;
   const p = Number(c["Signed Performance+"]) || 0;
   const s = Number(c["Signed Studio+"]) || 0;
@@ -441,151 +460,196 @@ function render(club){
   const depositSigned = Number(c["Deposit Signed Count"]) || 0;
   const leads = Number(c["Total Leads"]) || 0;
   const goal = Number(c["Goal"]) || 0;
-  const goalDate = parseDate(c["Goal Date"], true);
-  const start = parseDate(c["Campaign Start"], false);
-  const now = new Date();
+  const goalDate = isMonth ? null : parseDate(c["Goal Date"], true);
+  const start = isMonth ? null : parseDate(c["Campaign Start"], false);
 
   // ---- Hero ----
-  document.getElementById("fmCount").textContent = fmtNum(signed);
-  document.getElementById("fmGoal").textContent = goal ? "/ " + fmtNum(goal) : "";
-  document.getElementById("printClub").textContent = meta.label;
+  $("fmCount").textContent = entered ? fmtNum(signed) : "—";
+  $("fmGoal").textContent = (entered && goal) ? "/ " + fmtNum(goal) : "";
+  $("bignumLabel").textContent = isMonth ? "Signed Agreements in " + mLabel : "Signed Agreements";
+  $("printClub").textContent = meta.label + (isMonth ? " (" + mLabel + ")" : "");
 
-  const convBox = document.getElementById("statConversionBox");
+  const convBox = $("statConversionBox");
   convBox.hidden = !(reserved > 0);
   if(reserved > 0){
-    document.getElementById("statConversion").innerHTML =
+    $("statConversion").innerHTML =
       fmtNum(depositSigned) + " / " + fmtNum(reserved) + " <small>(" + (depositSigned/reserved*100).toFixed(0) + "%)</small>";
   }
 
-  const daysBox = document.getElementById("statDaysBox");
-  daysBox.hidden = !goalDate;
+  // Days strip: total view = days to the goal date; month view = days left in the month
+  const daysBox = $("statDaysBox");
   let daysLeft = 0;
-  if(goalDate){
-    daysLeft = Math.max(0, Math.ceil((goalDate - now) / DAY));
-    document.getElementById("statDays").textContent = (now > goalDate) ? "Passed" : daysLeft;
+  if(isMonth){
+    const mi = MONTHS.indexOf(String(mLabel).toLowerCase());
+    if(mi === now.getMonth()){
+      const end = new Date(now.getFullYear(), mi + 1, 0, 23, 59, 59);
+      daysBox.hidden = false;
+      $("statDaysLbl").textContent = "Days Left In " + mLabel;
+      $("statDays").textContent = Math.max(0, Math.ceil((end - now) / DAY));
+    } else {
+      daysBox.hidden = true;
+    }
+  } else {
+    $("statDaysLbl").textContent = "Days To Goal Date";
+    daysBox.hidden = !goalDate;
+    if(goalDate){
+      daysLeft = Math.max(0, Math.ceil((goalDate - now) / DAY));
+      $("statDays").textContent = (now > goalDate) ? "Passed" : daysLeft;
+    }
   }
 
-  const leadsBox = document.getElementById("statLeadsBox");
+  const leadsBox = $("statLeadsBox");
   leadsBox.hidden = !(leads > 0);
   if(leads > 0){
-    document.getElementById("statLeadsConv").innerHTML =
+    $("statLeadsConv").innerHTML =
       fmtNum(signed) + " / " + fmtNum(leads) + " <small>(" + (signed/leads*100).toFixed(0) + "%)</small>";
   }
 
-  // ---- Panel header ----
-  document.getElementById("panelTitle").textContent = meta.label;
-  document.getElementById("panelTag").textContent = c["Status Label"] || "Presale Open";
+  // ---- Panel header + note ----
+  $("panelTitle").textContent = meta.label;
+  $("panelTag").textContent = c["Status Label"] || base["Status Label"] || "Presale Open";
+  const note = $("monthNote");
+  if(isMonth && !entered){
+    note.hidden = false;
+    note.textContent = mLabel + " numbers haven't been entered yet. Add them under \"Month\" in stats.js.";
+  } else {
+    note.hidden = true;
+  }
 
   // ---- Overall progress ----
-  const gauge = document.getElementById("gauge");
-  const fill = document.getElementById("fill");
-  const goalNote = document.getElementById("goalNote");
-  if(goal){
+  $("titleProgress").textContent = isMonth ? mLabel + " Progress" : "Overall Progress";
+  const gauge = $("gauge");
+  const fill = $("fill");
+  const goalNote = $("goalNote");
+  if(!entered){
+    $("mainCount").textContent = "—";
+    showGauge(false); goalNote.hidden = true;
+  } else if(goal){
     const pct = (signed / goal) * 100;
-    document.getElementById("mainCount").innerHTML = fmtNum(signed) + " / " + fmtNum(goal) + pctSpan(pct);
-    gauge.hidden = false; goalNote.hidden = true;
-    // restart the fill animation each time a club is shown
+    $("mainCount").innerHTML = fmtNum(signed) + " / " + fmtNum(goal) + pctSpan(pct);
+    showGauge(true); goalNote.hidden = true;
     fill.style.transition = "none"; fill.setAttribute("width", "0");
     void fill.getBoundingClientRect();
     fill.style.transition = "";
     fill.setAttribute("width", (Math.min(100, pct)/100*600).toFixed(1));
   } else {
-    document.getElementById("mainCount").innerHTML = fmtNum(signed) + " <span>signed</span>";
-    gauge.hidden = true; goalNote.hidden = false;
+    $("mainCount").innerHTML = fmtNum(signed) + " <span>signed" + (isMonth ? " in " + mLabel : "") + "</span>";
+    showGauge(false);
+    goalNote.hidden = isMonth;          // "goal not set" only matters for the total view
   }
 
   // ---- Membership split ----
+  $("titleSplit").textContent = isMonth ? "Membership Type Split (Signed in " + mLabel + ")" : "Membership Type Split (Signed)";
+  const tierEntered = has(c["Signed Performance+"]) || has(c["Signed Studio+"]) || has(c["Signed Neighborhood"]);
   const total = p + s + n;
   const pc = v => total ? v/total*100 : 0;
-  document.getElementById("pCount").innerHTML = fmtNum(p) + pctSpan(pc(p));
-  document.getElementById("sCount").innerHTML = fmtNum(s) + pctSpan(pc(s));
-  document.getElementById("nCount").innerHTML = fmtNum(n) + pctSpan(pc(n));
-
-  // ---- EFT (only if this club has EFT numbers) ----
-  const eftKeys = ["EFT Performance+","EFT Studio+","EFT Neighborhood","Total Expected EFT","Avg Ticket Price"];
-  const hasEft = eftKeys.some(k => c[k] !== undefined && c[k] !== null && c[k] !== "");
-  document.getElementById("eftSection").hidden = !hasEft;
-  if(hasEft){
-    document.getElementById("eftP").textContent = fmtMoney(c["EFT Performance+"]);
-    document.getElementById("eftS").textContent = fmtMoney(c["EFT Studio+"]);
-    document.getElementById("eftN").textContent = fmtMoney(c["EFT Neighborhood"]);
-    document.getElementById("eftTotal").textContent = fmtMoney(c["Total Expected EFT"]);
-    document.getElementById("eftAvg").textContent = fmtMoney(c["Avg Ticket Price"]);
+  if(tierEntered){
+    $("pCount").innerHTML = fmtNum(p) + pctSpan(pc(p));
+    $("sCount").innerHTML = fmtNum(s) + pctSpan(pc(s));
+    $("nCount").innerHTML = fmtNum(n) + pctSpan(pc(n));
+  } else {
+    $("pCount").textContent = $("sCount").textContent = $("nCount").textContent = "—";
   }
 
-  // ---- Pace check (needs goal, goal date and campaign start) ----
-  const neededEl = document.getElementById("paceNeeded");
-  const actualEl = document.getElementById("paceActual");
-  const statusEl = document.getElementById("paceStatus");
-  const paceNote = document.getElementById("paceNote");
-  if(goal && goalDate && start){
-    const remaining = Math.max(0, goal - signed);
-    const daysElapsed = Math.max(1, Math.ceil((now - start) / DAY));
-    const needed = daysLeft > 0 ? remaining / daysLeft : remaining;
-    const actual = signed / daysElapsed;
-    neededEl.textContent = needed.toFixed(1);
-    actualEl.textContent = actual.toFixed(1);
-    if(signed >= goal){ statusEl.textContent = "Goal Met"; statusEl.className = "val good"; }
-    else if(actual >= needed){ statusEl.textContent = "Ahead"; statusEl.className = "val good"; }
-    else { statusEl.textContent = "Behind"; statusEl.className = "val behind"; }
-    paceNote.hidden = true;
-  } else {
-    neededEl.textContent = actualEl.textContent = statusEl.textContent = "—";
-    statusEl.className = "val";
-    paceNote.hidden = false;
+  // ---- Pace check: total view only (needs goal, goal date and campaign start) ----
+  const paceSection = $("paceSection");
+  paceSection.hidden = isMonth;
+  if(!isMonth){
+    const neededEl = $("paceNeeded"), actualEl = $("paceActual"), statusEl = $("paceStatus"), paceNote = $("paceNote");
+    if(goal && goalDate && start){
+      const remaining = Math.max(0, goal - signed);
+      const daysElapsed = Math.max(1, Math.ceil((now - start) / DAY));
+      const needed = daysLeft > 0 ? remaining / daysLeft : remaining;
+      const actual = signed / daysElapsed;
+      neededEl.textContent = needed.toFixed(1);
+      actualEl.textContent = actual.toFixed(1);
+      if(signed >= goal){ statusEl.textContent = "Goal Met"; statusEl.className = "val good"; }
+      else if(actual >= needed){ statusEl.textContent = "Ahead"; statusEl.className = "val good"; }
+      else { statusEl.textContent = "Behind"; statusEl.className = "val behind"; }
+      paceNote.hidden = true;
+    } else {
+      neededEl.textContent = actualEl.textContent = statusEl.textContent = "—";
+      statusEl.className = "val";
+      paceNote.hidden = false;
+    }
   }
 }
 
 function renderTabCounts(){
   CLUBS.forEach(cl => {
     const v = Number(clubCfg(cl.key)["Signed Agreements"]) || 0;
-    document.getElementById("tabCount-" + cl.key).textContent = fmtNum(v) + " signed";
+    $("tabCount-" + cl.key).textContent = fmtNum(v) + " signed";
   });
+  $("monthBtnLabel").textContent = monthLabel();
 }
 
-function setClub(club, opts){
+function setState(club, view, opts){
   opts = opts || {};
   if(!CLUBS.some(x => x.key === club)) club = "Maxwell";
-  const changed = club !== currentClub;
-  currentClub = club;
+  const monthOk = statsData ? supportsMonth(club) : false;
+  if(view !== "month" || !monthOk) view = "total";
+  const changed = club !== currentClub || view !== currentView;
+  currentClub = club; currentView = view;
+
   document.querySelectorAll(".club-tab").forEach(btn => {
     const on = btn.dataset.club === club;
     btn.setAttribute("aria-selected", on ? "true" : "false");
     btn.tabIndex = on ? 0 : -1;
   });
-  document.getElementById("panel").setAttribute("aria-labelledby", "tab-" + club);
+  $("viewTabs").hidden = !monthOk;
+  document.querySelectorAll(".view-tab").forEach(btn => {
+    const on = btn.dataset.view === view;
+    btn.setAttribute("aria-selected", on ? "true" : "false");
+    btn.tabIndex = on ? 0 : -1;
+  });
+  $("panel").setAttribute("aria-labelledby", "tab-" + club);
+
   if(opts.updateHash !== false && history.replaceState){
-    history.replaceState(null, "", "#" + club.toLowerCase());
+    history.replaceState(null, "", "#" + club.toLowerCase() + (view === "month" ? "-month" : ""));
   }
   if(!statsData) return;
   const swap = changed && !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if(swap){
-    const hs = document.getElementById("heroStats"), pn = document.getElementById("panel");
+    const hs = $("heroStats"), pn = $("panel");
     hs.classList.add("swapping"); pn.classList.add("swapping");
-    setTimeout(() => { render(club); hs.classList.remove("swapping"); pn.classList.remove("swapping"); }, 180);
+    setTimeout(() => { render(club, view); hs.classList.remove("swapping"); pn.classList.remove("swapping"); }, 180);
   } else {
-    render(club);
+    render(club, view);
   }
 }
 
-function clubFromHash(){
+// "#southend", "#maxwell", "#maxwell-month"
+function stateFromHash(){
   const h = (location.hash || "").replace("#","").toLowerCase();
-  const hit = CLUBS.find(x => x.key.toLowerCase() === h || x.label.toLowerCase().replace(/\s+/g,"") === h);
-  return hit ? hit.key : "Maxwell";
+  const isMonth = /-month$/.test(h);
+  const name = h.replace(/-month$/, "");
+  const hit = CLUBS.find(x => x.key.toLowerCase() === name || x.label.toLowerCase().replace(/\s+/g,"") === name);
+  return { club: hit ? hit.key : "Maxwell", view: isMonth ? "month" : "total" };
 }
 
-// toggle clicks + arrow-key navigation
+// club toggle: clicks + arrow keys
 document.querySelectorAll(".club-tab").forEach((btn, i, all) => {
-  btn.addEventListener("click", () => setClub(btn.dataset.club));
+  btn.addEventListener("click", () => setState(btn.dataset.club, currentView));
   btn.addEventListener("keydown", e => {
     if(e.key === "ArrowRight" || e.key === "ArrowLeft"){
       e.preventDefault();
       const next = all[(i + (e.key === "ArrowRight" ? 1 : all.length - 1)) % all.length];
-      next.focus(); setClub(next.dataset.club);
+      next.focus(); setState(next.dataset.club, currentView);
     }
   });
 });
-window.addEventListener("hashchange", () => setClub(clubFromHash(), {updateHash:false}));
+// total / month toggle: clicks + arrow keys
+document.querySelectorAll(".view-tab").forEach((btn, i, all) => {
+  btn.addEventListener("click", () => setState(currentClub, btn.dataset.view));
+  btn.addEventListener("keydown", e => {
+    if(e.key === "ArrowRight" || e.key === "ArrowLeft"){
+      e.preventDefault();
+      const next = all[(i + (e.key === "ArrowRight" ? 1 : all.length - 1)) % all.length];
+      next.focus(); setState(currentClub, next.dataset.view);
+    }
+  });
+});
+window.addEventListener("hashchange", () => { const st = stateFromHash(); setState(st.club, st.view, {updateHash:false}); });
 
 // Load stats.js fresh every time, bypassing any cached copy.
 function loadStats(){
@@ -594,16 +658,15 @@ function loadStats(){
   script.onload = function(){
     statsData = STATS;
     renderTabCounts();
-    currentClub = null;                 // force a first render without the fade
-    const start = clubFromHash();
-    currentClub = start;
-    setClub(start, {updateHash:false});
-    render(start);
+    const st = stateFromHash();
+    currentClub = null; currentView = null;       // force a first render without the fade
+    setState(st.club, st.view, {updateHash:false});
+    render(currentClub, currentView);
     const t = STATS["Last Updated"];
-    document.getElementById("lastUpdated").textContent = t ? ("Stats as of " + t) : "Stats as of last update";
+    $("lastUpdated").textContent = t ? ("Stats as of " + t) : "Stats as of last update";
   };
   script.onerror = function(){
-    document.getElementById("lastUpdated").textContent = "Couldn't load stats.js — check the file is in the same folder";
+    $("lastUpdated").textContent = "Couldn't load stats.js — check the file is in the same folder";
   };
   document.body.appendChild(script);
 }
