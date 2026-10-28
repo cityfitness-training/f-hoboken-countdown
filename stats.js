@@ -4,24 +4,31 @@
 // The page has a toggle at the top: "Maxwell" and "Southend" are the
 // two clubs it switches between. Each club has its own block below.
 //
+// CURRENT MONTH VIEW
+//   "Month Label" (just below) is the name of the month being shown, for
+//   example "October". Change it once at the start of a new month and the
+//   toggle button and every heading on the page update to match.
+//   A club shows a second toggle ("Total Count" / the month) only if it has a
+//   "Month" block. Maxwell has one. Southend does not, so it stays as it is.
+//   Inside "Month", use the same fields as the club's totals but only for
+//   that month. Leave a field as "" until you have the number and the page
+//   will show a dash instead of a zero.
+//
 // PER-CLUB SETTINGS (inside each club block):
 //   "Goal"            the signed-agreements target. 0 = not set yet.
 //   "Goal Date"       last day to hit the goal, as "YYYY-MM-DD". "" = not set yet.
 //   "Campaign Start"  the day that club's presale opened, "YYYY-MM-DD". "" = not set yet.
 //   "Status Label"    (optional) the small tag next to the club name.
 //   The progress bar needs "Goal". "Days To Goal Date" needs "Goal Date".
-//   The Pace Check needs all three.
+//   The Pace Check needs all three. (Total view only.)
+//   Inside "Month" you may add an optional "Goal" for the month. With one, the
+//   month view shows a progress bar. Without it, it just shows the count.
 //
-// EFT fields (Performance+/Studio+/Neighborhood, Total Expected,
-// Avg Ticket Price) are typed straight from your tracker, nothing
-// here is calculated. "Total Expected EFT" is its own number, not a
-// sum of the three above it. If a club has no EFT fields, the EFT
-// section is simply hidden for that club.
-//
-// IMPORTANT: never put commas inside numbers (write 38705.50, not 38,705.50).
+// IMPORTANT: never put commas inside numbers (write 1496, not 1,496).
 // ============================================================
 const STATS = {
   "Last Updated": "October 26, 9:15AM",
+  "Month Label": "October",
 
   "Maxwell": {
     "Goal": 1200,
@@ -37,11 +44,17 @@ const STATS = {
     "Reserved Members": 725,
     "Total Leads": 3474,
 
-    "EFT Performance+": 53416.50,
-    "EFT Studio+": 43267.00,
-    "EFT Neighborhood": 29629.50,
-    "Total Expected EFT": 134708.00,
-    "Avg Ticket Price": 90.05
+    // ---- Current month only (Month Label above). Fill these in. ----
+    "Month": {
+      "Goal": 0,
+      "Signed Agreements": "",
+      "Signed Performance+": "",
+      "Signed Studio+": "",
+      "Signed Neighborhood": "",
+      "Deposit Signed Count": "",
+      "Reserved Members": "",
+      "Total Leads": ""
+    }
   },
 
   "Southend": {
