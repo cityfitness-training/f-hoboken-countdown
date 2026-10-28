@@ -27,7 +27,7 @@
 // IMPORTANT: never put commas inside numbers (write 1496, not 1,496).
 // ============================================================
 const STATS = {
-  "Last Updated": "October 26, 9:15AM",
+  "Last Updated": "October 28, 10:00AM",
   "Month Label": "October",
 
   "Maxwell": {
