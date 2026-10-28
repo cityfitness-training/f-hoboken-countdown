@@ -36,24 +36,24 @@ const STATS = {
     "Campaign Start": "2026-07-06",
     "Status Label": "Presale Open",
 
-    "Signed Agreements": 1496,
-    "Signed Performance+": 541,
-    "Signed Studio+": 523,
-    "Signed Neighborhood": 432,
+    "Signed Agreements": 1504,
+    "Signed Performance+": 543,
+    "Signed Studio+": 524,
+    "Signed Neighborhood": 437,
     "Deposit Signed Count": 507,
     "Reserved Members": 725,
-    "Total Leads": 3474,
+    "Total Leads": 3539,
 
     // ---- Current month only (Month Label above). Fill these in. ----
     "Month": {
-      "Goal": 0,
-      "Signed Agreements": "",
-      "Signed Performance+": "",
-      "Signed Studio+": "",
-      "Signed Neighborhood": "",
+      "Goal": 400,
+      "Signed Agreements": "404",
+      "Signed Performance+": "104",
+      "Signed Studio+": "144",
+      "Signed Neighborhood": "155",
       "Deposit Signed Count": "",
       "Reserved Members": "",
-      "Total Leads": ""
+      "Total Leads": "1150"
     }
   },
 
@@ -63,9 +63,9 @@ const STATS = {
     "Campaign Start": "2026-10-18",
     "Status Label": "Presale Open",
 
-    "Signed Agreements": 54,
-    "Signed Performance+": 27,
-    "Signed Studio+": 12,
+    "Signed Agreements": 57,
+    "Signed Performance+": 29,
+    "Signed Studio+": 14,
     "Signed Neighborhood": 15,
     "Deposit Signed Count": 0,
     "Reserved Members": 0,
