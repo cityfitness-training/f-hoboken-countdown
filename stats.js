@@ -14,6 +14,17 @@
 //   that month. Leave a field as "" until you have the number and the page
 //   will show a dash instead of a zero.
 //
+// TERM SPLIT (12 month / 3 month)
+//   Each tier can show how many are on 12-month and 3-month terms. Type the
+//   numbers in these fields, in the club's totals and/or inside "Month":
+//     "Signed Performance+ 12M"   "Signed Performance+ 3M"
+//     "Signed Studio+ 12M"        "Signed Studio+ 3M"
+//     "Signed Neighborhood 12M"   "Signed Neighborhood 3M"
+//   They show under each tier card, plus an overall 12M / 3M line under the
+//   cards. If every one of these is left as "" the term lines stay hidden.
+//   The tier totals ("Signed Performance+" etc.) are still typed like always.
+//   If you ever leave a tier total blank, the page adds its 12M + 3M for you.
+//
 // PER-CLUB SETTINGS (inside each club block):
 //   "Goal"            the signed-agreements target. 0 = not set yet.
 //   "Goal Date"       last day to hit the goal, as "YYYY-MM-DD". "" = not set yet.
@@ -40,6 +51,12 @@ const STATS = {
     "Signed Performance+": 548,
     "Signed Studio+": 524,
     "Signed Neighborhood": 440,
+    "Signed Performance+ 12M": "",
+    "Signed Performance+ 3M": "",
+    "Signed Studio+ 12M": "",
+    "Signed Studio+ 3M": "",
+    "Signed Neighborhood 12M": "",
+    "Signed Neighborhood 3M": "",
     "Deposit Signed Count": 507,
     "Reserved Members": 725,
     "Total Leads": 3616,
@@ -51,6 +68,12 @@ const STATS = {
       "Signed Performance+": "109",
       "Signed Studio+": "144",
       "Signed Neighborhood": "158",
+      "Signed Performance+ 12M": "",
+      "Signed Performance+ 3M": "",
+      "Signed Studio+ 12M": "",
+      "Signed Studio+ 3M": "",
+      "Signed Neighborhood 12M": "",
+      "Signed Neighborhood 3M": "",
       "Deposit Signed Count": "",
       "Reserved Members": "",
       "Total Leads": "1228"
