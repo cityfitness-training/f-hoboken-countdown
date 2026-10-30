@@ -239,6 +239,20 @@ svg.gauge[hidden]{display:none;}
 .split-card .name{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:2px;}
 .split-card .count{font-size:26px;font-weight:900;color:var(--copper-deep);margin:2px 0 0;}
 .split-card .count span{font-size:14px;color:var(--slate);font-weight:700;}
+.term-row{display:flex;gap:18px;margin-top:12px;padding-top:11px;border-top:1px solid var(--tan);}
+.term-row[hidden]{display:none;}
+.term{flex:1;min-width:0;}
+.term .t-lbl{display:block;font-size:11px;font-weight:700;letter-spacing:0.08em;color:var(--slate);text-transform:uppercase;}
+.term .t-val{display:block;font-size:17px;font-weight:900;color:var(--ink);margin-top:1px;}
+.term .t-val span{font-size:12px;font-weight:700;color:var(--slate);}
+.term-total{display:flex;align-items:center;gap:28px;flex-wrap:wrap;margin-top:16px;padding:16px 20px;background:var(--ink);color:var(--cream);border-radius:14px;}
+.term-total[hidden]{display:none;}
+.term-total .tt-title{font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--tan);margin-right:auto;}
+.term-total .tt-item{text-align:center;}
+.term-total .tt-lbl{display:block;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--tan);}
+.term-total .tt-val{display:block;font-size:22px;font-weight:900;color:var(--copper-light);margin-top:1px;}
+.term-total .tt-val span{font-size:13px;font-weight:700;color:var(--tan);}
+@media (max-width:640px){.term-total{gap:18px;}.term-total .tt-title{flex-basis:100%;}}
 
 /* ---------- PACE ---------- */
 .pace-card{
@@ -380,9 +394,26 @@ footer{text-align:center;font-size:12px;color:var(--slate);padding:36px 0 0;}
     <div class="section">
       <p class="section-title" id="titleSplit">Membership Type Split (Signed)</p>
       <div class="split-grid">
-        <div class="split-card"><div class="name">Performance+</div><div class="count" id="pCount">—</div></div>
-        <div class="split-card"><div class="name">Studio+</div><div class="count" id="sCount">—</div></div>
-        <div class="split-card"><div class="name">Neighborhood</div><div class="count" id="nCount">—</div></div>
+        <div class="split-card"><div class="name">Performance+</div><div class="count" id="pCount">—</div>
+          <div class="term-row" id="pTerm" hidden>
+            <div class="term"><span class="t-lbl">12 Month</span><span class="t-val" id="pT12">—</span></div>
+            <div class="term"><span class="t-lbl">3 Month</span><span class="t-val" id="pT3">—</span></div>
+          </div></div>
+        <div class="split-card"><div class="name">Studio+</div><div class="count" id="sCount">—</div>
+          <div class="term-row" id="sTerm" hidden>
+            <div class="term"><span class="t-lbl">12 Month</span><span class="t-val" id="sT12">—</span></div>
+            <div class="term"><span class="t-lbl">3 Month</span><span class="t-val" id="sT3">—</span></div>
+          </div></div>
+        <div class="split-card"><div class="name">Neighborhood</div><div class="count" id="nCount">—</div>
+          <div class="term-row" id="nTerm" hidden>
+            <div class="term"><span class="t-lbl">12 Month</span><span class="t-val" id="nT12">—</span></div>
+            <div class="term"><span class="t-lbl">3 Month</span><span class="t-val" id="nT3">—</span></div>
+          </div></div>
+      </div>
+      <div class="term-total" id="termTotal" hidden>
+        <span class="tt-title" id="termTotalTitle">Term Split</span>
+        <div class="tt-item"><span class="tt-lbl">12 Month</span><span class="tt-val" id="tt12">—</span></div>
+        <div class="tt-item"><span class="tt-lbl">3 Month</span><span class="tt-val" id="tt3">—</span></div>
       </div>
     </div>
 
@@ -453,9 +484,16 @@ function render(club, view){
 
   const entered = has(c["Signed Agreements"]);          // month view: false until you type the number
   const signed = Number(c["Signed Agreements"]) || 0;
-  const p = Number(c["Signed Performance+"]) || 0;
-  const s = Number(c["Signed Studio+"]) || 0;
-  const n = Number(c["Signed Neighborhood"]) || 0;
+  // tier data: the typed tier total, plus the 12M / 3M term numbers if you entered them
+  const tierInfo = name => {
+    const v12 = c["Signed " + name + " 12M"], v3 = c["Signed " + name + " 3M"];
+    const hasTerm = has(v12) || has(v3);
+    const typed = has(c["Signed " + name]);
+    const n12 = Number(v12) || 0, n3 = Number(v3) || 0;
+    return { typed, hasTerm, v12, v3, n12, n3, total: typed ? Number(c["Signed " + name]) || 0 : (hasTerm ? n12 + n3 : 0) };
+  };
+  const tP = tierInfo("Performance+"), tS = tierInfo("Studio+"), tN = tierInfo("Neighborhood");
+  const p = tP.total, s = tS.total, n = tN.total;
   const reserved = Number(c["Reserved Members"]) || 0;
   const depositSigned = Number(c["Deposit Signed Count"]) || 0;
   const leads = Number(c["Total Leads"]) || 0;
@@ -540,7 +578,7 @@ function render(club, view){
 
   // ---- Membership split ----
   $("titleSplit").textContent = isMonth ? "Membership Type Split (Signed in " + mLabel + ")" : "Membership Type Split (Signed)";
-  const tierEntered = has(c["Signed Performance+"]) || has(c["Signed Studio+"]) || has(c["Signed Neighborhood"]);
+  const tierEntered = [tP, tS, tN].some(t => t.typed || t.hasTerm);
   const total = p + s + n;
   const pc = v => total ? v/total*100 : 0;
   if(tierEntered){
@@ -549,6 +587,33 @@ function render(club, view){
     $("nCount").innerHTML = fmtNum(n) + pctSpan(pc(n));
   } else {
     $("pCount").textContent = $("sCount").textContent = $("nCount").textContent = "—";
+  }
+
+  // ---- Term split (12 month / 3 month): only shows once you've typed some term numbers ----
+  const anyTerm = [tP, tS, tN].some(t => t.hasTerm);
+  const termVal = (raw, other) => {
+    if(!has(raw)) return "—";
+    const a = Number(raw) || 0, b = Number(other) || 0;
+    const base = a + b;
+    // only show a percentage once both the 12M and 3M numbers are typed in
+    return fmtNum(a) + ((has(other) && base) ? " <span>(" + (a/base*100).toFixed(0) + "%)</span>" : "");
+  };
+  [["p", tP], ["s", tS], ["n", tN]].forEach(([id, t]) => {
+    $(id + "Term").hidden = !anyTerm;
+    if(anyTerm){
+      $(id + "T12").innerHTML = termVal(t.v12, t.v3);
+      $(id + "T3").innerHTML  = termVal(t.v3, t.v12);
+    }
+  });
+  const termTotal = $("termTotal");
+  termTotal.hidden = !anyTerm;
+  if(anyTerm){
+    const s12 = tP.n12 + tS.n12 + tN.n12, s3 = tP.n3 + tS.n3 + tN.n3, sb = s12 + s3;
+    $("termTotalTitle").textContent = isMonth ? "Term Split (" + mLabel + ")" : "Term Split";
+    const allBoth = [tP, tS, tN].every(t => has(t.v12) && has(t.v3));
+    const share = v => (allBoth && sb) ? " <span>(" + (v/sb*100).toFixed(0) + "%)</span>" : "";
+    $("tt12").innerHTML = fmtNum(s12) + share(s12);
+    $("tt3").innerHTML  = fmtNum(s3) + share(s3);
   }
 
   // ---- Pace check: total view only (needs goal, goal date and campaign start) ----
