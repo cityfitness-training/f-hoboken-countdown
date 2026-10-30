@@ -27,7 +27,7 @@
 // IMPORTANT: never put commas inside numbers (write 1496, not 1,496).
 // ============================================================
 const STATS = {
-  "Last Updated": "October 28, 10:00AM",
+  "Last Updated": "October 30, 8:00AM",
   "Month Label": "October",
 
   "Maxwell": {
@@ -36,24 +36,24 @@ const STATS = {
     "Campaign Start": "2026-07-06",
     "Status Label": "Presale Open",
 
-    "Signed Agreements": 1504,
-    "Signed Performance+": 543,
+    "Signed Agreements": 1512,
+    "Signed Performance+": 548,
     "Signed Studio+": 524,
-    "Signed Neighborhood": 437,
+    "Signed Neighborhood": 440,
     "Deposit Signed Count": 507,
     "Reserved Members": 725,
-    "Total Leads": 3539,
+    "Total Leads": 3616,
 
     // ---- Current month only (Month Label above). Fill these in. ----
     "Month": {
       "Goal": 400,
-      "Signed Agreements": "404",
-      "Signed Performance+": "104",
+      "Signed Agreements": "412",
+      "Signed Performance+": "109",
       "Signed Studio+": "144",
-      "Signed Neighborhood": "155",
+      "Signed Neighborhood": "158",
       "Deposit Signed Count": "",
       "Reserved Members": "",
-      "Total Leads": "1150"
+      "Total Leads": "1228"
     }
   },
 
@@ -63,12 +63,12 @@ const STATS = {
     "Campaign Start": "2026-10-18",
     "Status Label": "Presale Open",
 
-    "Signed Agreements": 57,
+    "Signed Agreements": 63,
     "Signed Performance+": 29,
-    "Signed Studio+": 14,
-    "Signed Neighborhood": 15,
+    "Signed Studio+": 18,
+    "Signed Neighborhood": 16,
     "Deposit Signed Count": 0,
     "Reserved Members": 0,
-    "Total Leads": 684
+    "Total Leads": 795
   }
 };
