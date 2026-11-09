@@ -38,8 +38,8 @@
 // IMPORTANT: never put commas inside numbers (write 1496, not 1,496).
 // ============================================================
 const STATS = {
-  "Last Updated": "October 31, 1:00PM",
-  "Month Label": "October",
+  "Last Updated": "November 9, 9:00AM",
+  "Month Label": "November",
 
   "Maxwell": {
     "Goal": 1200,
@@ -86,12 +86,12 @@ const STATS = {
     "Campaign Start": "2026-10-18",
     "Status Label": "Presale Open",
 
-    "Signed Agreements": 63,
-    "Signed Performance+": 29,
-    "Signed Studio+": 18,
-    "Signed Neighborhood": 16,
+    "Signed Agreements": 84,
+    "Signed Performance+": 41,
+    "Signed Studio+": 23,
+    "Signed Neighborhood": 20,
     "Deposit Signed Count": 0,
     "Reserved Members": 0,
-    "Total Leads": 795
+    "Total Leads": 976
   }
 };
