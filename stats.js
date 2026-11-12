@@ -47,51 +47,51 @@ const STATS = {
     "Campaign Start": "2026-07-06",
     "Status Label": "Presale Open",
 
-    "Signed Agreements": 1580,
-    "Signed Performance+": 567,
-    "Signed Studio+": 545,
-    "Signed Neighborhood": 468,
-    "Signed Performance+ 12M": "550",
-    "Signed Performance+ 3M": "17",
-    "Signed Studio+ 12M": "529",
+    "Signed Agreements": 1594,
+    "Signed Performance+": 574,
+    "Signed Studio+": 549,
+    "Signed Neighborhood": 471,
+    "Signed Performance+ 12M": "556",
+    "Signed Performance+ 3M": "18",
+    "Signed Studio+ 12M": "533",
     "Signed Studio+ 3M": "16",
-    "Signed Neighborhood 12M": "445",
+    "Signed Neighborhood 12M": "448",
     "Signed Neighborhood 3M": "23",
     "Deposit Signed Count": 507,
     "Reserved Members": 725,
-    "Total Leads": 3943,
+    "Total Leads": 4026,
 
     // ---- Current month only (Month Label above). Fill these in. ----
     "Month": {
       "Goal": 400,
-      "Signed Agreements": "51",
-      "Signed Performance+": "16",
-      "Signed Studio+": "15",
-      "Signed Neighborhood": "20",
-      "Signed Performance+ 12M": "13",
-      "Signed Performance+ 3M": "3",
-      "Signed Studio+ 12M": "12",
+      "Signed Agreements": "66",
+      "Signed Performance+": "23",
+      "Signed Studio+": "20",
+      "Signed Neighborhood": "23",
+      "Signed Performance+ 12M": "19",
+      "Signed Performance+ 3M": "4",
+      "Signed Studio+ 12M": "17",
       "Signed Studio+ 3M": "3",
-      "Signed Neighborhood 12M": "12",
+      "Signed Neighborhood 12M": "15",
       "Signed Neighborhood 3M": "8",
       "Deposit Signed Count": "",
       "Reserved Members": "",
-      "Total Leads": "139"
+      "Total Leads": "351"
     }
   },
 
   "Southend": {
     "Goal": 1200,
-    "Goal Date": "2026-12-18",
+    "Goal Date": "2026-01-01",
     "Campaign Start": "2026-10-18",
     "Status Label": "Presale Open",
 
-    "Signed Agreements": 88,
-    "Signed Performance+": 42,
-    "Signed Studio+": 25,
-    "Signed Neighborhood": 21,
+    "Signed Agreements": 96,
+    "Signed Performance+": 46,
+    "Signed Studio+": 27,
+    "Signed Neighborhood": 23,
     "Deposit Signed Count": 0,
     "Reserved Members": 0,
-    "Total Leads": 976
+    "Total Leads": 1037
   }
 };
