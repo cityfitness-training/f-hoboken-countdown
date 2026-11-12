@@ -166,6 +166,7 @@ body{
   margin-top:34px;
   flex-wrap:wrap;
 }
+.stat-strip.sub-strip{margin-top:22px;gap:44px;}
 .stat{text-align:center;}
 .stat[hidden]{display:none;}
 .stat .val{font-size:28px;font-weight:900;color:var(--copper-light);}
@@ -330,7 +331,17 @@ footer{text-align:center;font-size:12px;color:var(--slate);padding:36px 0 0;}
       <span class="bignum" id="fmCount">—</span>
       <span class="bignum-of" id="fmGoal"></span>
     </div>
-    <p class="bignum-label" id="bignumLabel">Signed Agreements</p>
+    <p class="bignum-label" id="bignumLabel">Active Members</p>
+<div class="stat-strip sub-strip">
+<div class="stat" id="statSignedBox">
+<div class="val" id="statSigned">—</div>
+<div class="lbl">Signed Agreements</div>
+</div>
+<div class="stat" id="statCanceledBox">
+<div class="val" id="statCanceled">—</div>
+<div class="lbl">Canceled</div>
+</div>
+</div>
     <div class="stat-strip">
       <div class="stat" id="statConversionBox">
         <div class="val" id="statConversion">—</div>
@@ -484,6 +495,9 @@ function render(club, view){
 
   const entered = has(c["Signed Agreements"]);          // month view: false until you type the number
   const signed = Number(c["Signed Agreements"]) || 0;
+const canceledEntered = has(c["Canceled"]); // blank = not entered yet (counts as 0 for Active Members)
+const canceled = Number(c["Canceled"]) || 0;
+const active = Math.max(0, signed - canceled);
   // tier data: the typed tier total, plus the 12M / 3M term numbers if you entered them
   const tierInfo = name => {
     const v12 = c["Signed " + name + " 12M"], v3 = c["Signed " + name + " 3M"];
@@ -502,9 +516,13 @@ function render(club, view){
   const start = isMonth ? null : parseDate(c["Campaign Start"], false);
 
   // ---- Hero ----
-  $("fmCount").textContent = entered ? fmtNum(signed) : "—";
-  $("fmGoal").textContent = (entered && goal) ? "/ " + fmtNum(goal) : "";
-  $("bignumLabel").textContent = isMonth ? "Signed Agreements in " + mLabel : "Signed Agreements";
+  $("fmCount").textContent = entered ? fmtNum(active) : "—";
+  $("fmGoal").textContent = ""; // goal is measured on Signed Agreements, shown in Overall Progress below
+  $("bignumLabel").textContent = isMonth ? "Active Members in " + mLabel : "Active Members";
+$("statSigned").textContent = entered ? fmtNum(signed) : "—";
+$("statCanceled").innerHTML = canceledEntered
+? fmtNum(canceled) + (signed > 0 ? " <small>(" + (canceled/signed*100).toFixed(1) + "%)</small>" : "")
+: "—";
   $("printClub").textContent = meta.label + (isMonth ? " (" + mLabel + ")" : "");
 
   const convBox = $("statConversionBox");
@@ -642,8 +660,9 @@ function render(club, view){
 
 function renderTabCounts(){
   CLUBS.forEach(cl => {
-    const v = Number(clubCfg(cl.key)["Signed Agreements"]) || 0;
-    $("tabCount-" + cl.key).textContent = fmtNum(v) + " signed";
+    const cfg = clubCfg(cl.key);
+const v = Math.max(0, (Number(cfg["Signed Agreements"]) || 0) - (Number(cfg["Canceled"]) || 0));
+    $("tabCount-" + cl.key).textContent = fmtNum(v) + " active";
   });
   $("monthBtnLabel").textContent = monthLabel();
 }
