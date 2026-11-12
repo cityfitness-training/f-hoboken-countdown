@@ -42,7 +42,7 @@
 // IMPORTANT: never put commas inside numbers (write 1496, not 1,496).
 // ============================================================
 const STATS = {
-  "Last Updated": "November 9, 9:00AM",
+  "Last Updated": "November 12, 8:30AM",
   "Month Label": "November",
 
   "Maxwell": {
@@ -52,7 +52,7 @@ const STATS = {
     "Status Label": "Presale Open",
 
     "Signed Agreements": 1594,
-"Canceled": 47,
+"Canceled": 0,
     "Signed Performance+": 574,
     "Signed Studio+": 549,
     "Signed Neighborhood": 471,
