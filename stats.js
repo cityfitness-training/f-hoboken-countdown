@@ -88,7 +88,7 @@ const STATS = {
 
   "Southend": {
     "Goal": 1200,
-    "Goal Date": "2026-01-01",
+    "Goal Date": "2027-01-01",
     "Campaign Start": "2026-10-18",
     "Status Label": "Presale Open",
 
