@@ -64,7 +64,10 @@ const STATS = {
     "Signed Neighborhood 3M": "25",
     "Deposit Signed Count": 507,
     "Reserved Members": 725,
-    "Total Leads": 4091,
+"Total Leads": 4091,
+"MTD Leads": "429",
+"Meta Leads": "",
+"Meta MTD Leads": "",
 
     // ---- Current month only (Month Label above). Fill these in. ----
     "Month": {
