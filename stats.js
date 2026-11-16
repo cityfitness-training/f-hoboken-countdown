@@ -51,8 +51,8 @@ const STATS = {
     "Campaign Start": "2026-07-06",
     "Status Label": "Presale Open",
 
-"Signed Agreements": 1600,
-"Active Members": 1558,
+"Signed Agreements": 1642,
+"Active Members": 1600,
 "Canceled": 42,
     "Signed Performance+": 568,
     "Signed Studio+": 555,
@@ -67,15 +67,15 @@ const STATS = {
     "Reserved Members": 725,
 "Total Leads": 4091,
 "MTD Leads": "429",
-"Meta Leads": "",
-"Meta MTD Leads": "",
+"Meta Leads": "1595",
+"Meta MTD Leads": "193",
 
     // ---- Current month only (Month Label above). Fill these in. ----
     "Month": {
       "Goal": 400,
-"Signed Agreements": "84",
+"Signed Agreements": "86",
 "Active Members": "84",
-"Canceled": "",
+"Canceled": "2",
       "Signed Performance+": "25",
       "Signed Studio+": "25",
       "Signed Neighborhood": "24",
@@ -106,8 +106,8 @@ const STATS = {
     "Deposit Signed Count": 0,
     "Reserved Members": 0,
     "Total Leads": 1065,
-    "MTD Leads": "",
-    "Meta Leads": "",
-    "Meta MTD Leads": ""
+    "MTD Leads": "228",
+    "Meta Leads": "845",
+    "Meta MTD Leads": "167"
   }
 };
