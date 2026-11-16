@@ -436,8 +436,8 @@ footer{text-align:center;font-size:12px;color:var(--slate);padding:36px 0 0;}
 <p class="section-title">Leads</p>
 <div class="leads-grid">
 <div class="split-card"><div class="name">Total Leads</div><div class="count" id="ldTotal">—</div></div>
-<div class="split-card"><div class="name">MTD Leads</div><div class="count" id="ldMtd">—</div><div class="sub" id="ldMtdSub"></div></div>
 <div class="split-card"><div class="name">Meta Leads</div><div class="count" id="ldMeta">—</div></div>
+<div class="split-card"><div class="name">MTD Leads</div><div class="count" id="ldMtd">—</div><div class="sub" id="ldMtdSub"></div></div>
 <div class="split-card"><div class="name">Meta MTD Leads</div><div class="count" id="ldMetaMtd">—</div><div class="sub" id="ldMetaMtdSub"></div></div>
 </div>
 </div>
@@ -655,10 +655,11 @@ const hasLeadFields = ["MTD Leads", "Meta Leads", "Meta MTD Leads"].some(k => k 
 leadsSection.hidden = isMonth || !hasLeadFields;
 if(!leadsSection.hidden){
 const ld = k => has(base[k]) ? fmtNum(Number(base[k]) || 0) : "—";
+const pctOf = (k, d) => (has(base[k]) && Number(base[d]) > 0) ? " <span>(" + (Number(base[k]) / Number(base[d]) * 100).toFixed(0) + "%)</span>" : "";
 $("ldTotal").textContent = ld("Total Leads");
 $("ldMtd").textContent = ld("MTD Leads");
-$("ldMeta").textContent = ld("Meta Leads");
-$("ldMetaMtd").textContent = ld("Meta MTD Leads");
+$("ldMeta").innerHTML = ld("Meta Leads") + pctOf("Meta Leads", "Total Leads");
+$("ldMetaMtd").innerHTML = ld("Meta MTD Leads") + pctOf("Meta MTD Leads", "MTD Leads");
 $("ldMtdSub").textContent = mLabel;
 $("ldMetaMtdSub").textContent = mLabel;
 }
