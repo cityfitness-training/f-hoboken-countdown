@@ -35,7 +35,7 @@
 //   Inside "Month" you may add an optional "Goal" for the month. With one, the
 //   month view shows a progress bar. Without it, it just shows the count.
 //
-// ACTIVE MEMBERS = "Signed Agreements" minus "Canceled". Type the canceled count
+// ACTIVE MEMBERS and CANCELED are both typed in by hand (Active is NOT calculated). Type the canceled count
 // in "Canceled" (totals and/or inside "Month"). Blank = not entered yet.
 // The cancellation % is worked out for you (Canceled / Signed Agreements).
 //
@@ -51,7 +51,8 @@ const STATS = {
     "Campaign Start": "2026-07-06",
     "Status Label": "Presale Open",
 
-    "Signed Agreements": 1600,
+"Signed Agreements": 1600,
+"Active Members": 1558,
 "Canceled": 42,
     "Signed Performance+": 568,
     "Signed Studio+": 555,
@@ -72,7 +73,8 @@ const STATS = {
     // ---- Current month only (Month Label above). Fill these in. ----
     "Month": {
       "Goal": 400,
-      "Signed Agreements": "84",
+"Signed Agreements": "84",
+"Active Members": "84",
 "Canceled": "",
       "Signed Performance+": "25",
       "Signed Studio+": "25",
@@ -95,7 +97,8 @@ const STATS = {
     "Campaign Start": "2026-10-18",
     "Status Label": "Presale Open",
 
-    "Signed Agreements": 103,
+"Signed Agreements": 103,
+"Active Members": 101,
 "Canceled": "2",
     "Signed Performance+": 47,
     "Signed Studio+": 33,
