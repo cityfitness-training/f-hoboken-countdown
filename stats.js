@@ -97,8 +97,8 @@ const STATS = {
     "Campaign Start": "2026-10-18",
     "Status Label": "Presale Open",
 
-"Signed Agreements": 103,
-"Active Members": 101,
+"Signed Agreements": 105,
+"Active Members": 103,
 "Canceled": "2",
     "Signed Performance+": 47,
     "Signed Studio+": 33,
