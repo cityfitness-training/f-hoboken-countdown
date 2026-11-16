@@ -255,6 +255,10 @@ svg.gauge[hidden]{display:none;}
 .term-total .tt-val span{font-size:13px;font-weight:700;color:var(--tan);}
 @media (max-width:640px){.term-total{gap:18px;}.term-total .tt-title{flex-basis:100%;}}
 
+.leads-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+@media (max-width:640px){.leads-grid{grid-template-columns:repeat(2,1fr);}}
+.split-card .sub{font-size:11px;font-weight:700;letter-spacing:0.08em;color:var(--slate);text-transform:uppercase;margin-top:2px;}
+
 /* ---------- PACE ---------- */
 .pace-card{
   background:#fff;border:1px solid var(--tan);border-radius:14px;padding:22px;
@@ -428,7 +432,17 @@ footer{text-align:center;font-size:12px;color:var(--slate);padding:36px 0 0;}
       </div>
     </div>
 
-    <div class="section" id="paceSection" style="padding-bottom:0;">
+<div class="section" id="leadsSection" hidden>
+<p class="section-title">Leads</p>
+<div class="leads-grid">
+<div class="split-card"><div class="name">Total Leads</div><div class="count" id="ldTotal">—</div></div>
+<div class="split-card"><div class="name">MTD Leads</div><div class="count" id="ldMtd">—</div><div class="sub" id="ldMtdSub"></div></div>
+<div class="split-card"><div class="name">Meta Leads</div><div class="count" id="ldMeta">—</div></div>
+<div class="split-card"><div class="name">Meta MTD Leads</div><div class="count" id="ldMetaMtd">—</div><div class="sub" id="ldMetaMtdSub"></div></div>
+</div>
+</div>
+
+<div class="section" id="paceSection" style="padding-bottom:0;">
       <p class="section-title">Pace Check</p>
       <div class="pace-card">
         <div class="pace-item"><div class="val" id="paceNeeded">—</div><div class="lbl">Needed / Day</div></div>
@@ -634,7 +648,21 @@ $("statCanceled").innerHTML = canceledEntered
     $("tt3").innerHTML  = fmtNum(s3) + share(s3);
   }
 
-  // ---- Pace check: total view only (needs goal, goal date and campaign start) ----
+// ---- Leads (clubs with MTD / Meta fields in stats.js, e.g. Southend): total view only ----
+const leadsSection = $("leadsSection");
+const hasLeadFields = ["MTD Leads", "Meta Leads", "Meta MTD Leads"].some(k => k in base);
+leadsSection.hidden = isMonth || !hasLeadFields;
+if(!leadsSection.hidden){
+const ld = k => has(base[k]) ? fmtNum(Number(base[k]) || 0) : "—";
+$("ldTotal").textContent = ld("Total Leads");
+$("ldMtd").textContent = ld("MTD Leads");
+$("ldMeta").textContent = ld("Meta Leads");
+$("ldMetaMtd").textContent = ld("Meta MTD Leads");
+$("ldMtdSub").textContent = mLabel;
+$("ldMetaMtdSub").textContent = mLabel;
+}
+
+// ---- Pace check: total view only (needs goal, goal date and campaign start) ----
   const paceSection = $("paceSection");
   paceSection.hidden = isMonth;
   if(!isMonth){
