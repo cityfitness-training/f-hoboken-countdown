@@ -42,7 +42,7 @@
 // IMPORTANT: never put commas inside numbers (write 1496, not 1,496).
 // ============================================================
 const STATS = {
-  "Last Updated": "November 12, 8:30AM",
+  "Last Updated": "November 16, 8:30AM",
   "Month Label": "November",
 
   "Maxwell": {
@@ -51,38 +51,38 @@ const STATS = {
     "Campaign Start": "2026-07-06",
     "Status Label": "Presale Open",
 
-    "Signed Agreements": 1594,
-"Canceled": 0,
-    "Signed Performance+": 574,
-    "Signed Studio+": 549,
-    "Signed Neighborhood": 471,
-    "Signed Performance+ 12M": "556",
-    "Signed Performance+ 3M": "18",
-    "Signed Studio+ 12M": "533",
+    "Signed Agreements": 1600,
+"Canceled": 42,
+    "Signed Performance+": 568,
+    "Signed Studio+": 555,
+    "Signed Neighborhood": 477,
+    "Signed Performance+ 12M": "549",
+    "Signed Performance+ 3M": "19",
+    "Signed Studio+ 12M": "539",
     "Signed Studio+ 3M": "16",
-    "Signed Neighborhood 12M": "448",
-    "Signed Neighborhood 3M": "23",
+    "Signed Neighborhood 12M": "452",
+    "Signed Neighborhood 3M": "25",
     "Deposit Signed Count": 507,
     "Reserved Members": 725,
-    "Total Leads": 4026,
+    "Total Leads": 4091,
 
     // ---- Current month only (Month Label above). Fill these in. ----
     "Month": {
       "Goal": 400,
-      "Signed Agreements": "66",
+      "Signed Agreements": "84",
 "Canceled": "",
-      "Signed Performance+": "23",
-      "Signed Studio+": "20",
-      "Signed Neighborhood": "23",
-      "Signed Performance+ 12M": "19",
-      "Signed Performance+ 3M": "4",
-      "Signed Studio+ 12M": "17",
+      "Signed Performance+": "25",
+      "Signed Studio+": "25",
+      "Signed Neighborhood": "24",
+      "Signed Performance+ 12M": "20",
+      "Signed Performance+ 3M": "5",
+      "Signed Studio+ 12M": "22",
       "Signed Studio+ 3M": "3",
-      "Signed Neighborhood 12M": "15",
-      "Signed Neighborhood 3M": "8",
+      "Signed Neighborhood 12M": "24",
+      "Signed Neighborhood 3M": "10",
       "Deposit Signed Count": "",
       "Reserved Members": "",
-      "Total Leads": "351"
+      "Total Leads": "429"
     }
   },
 
@@ -92,13 +92,13 @@ const STATS = {
     "Campaign Start": "2026-10-18",
     "Status Label": "Presale Open",
 
-    "Signed Agreements": 96,
-"Canceled": "",
-    "Signed Performance+": 46,
-    "Signed Studio+": 27,
+    "Signed Agreements": 103,
+"Canceled": "2",
+    "Signed Performance+": 47,
+    "Signed Studio+": 33,
     "Signed Neighborhood": 23,
     "Deposit Signed Count": 0,
     "Reserved Members": 0,
-    "Total Leads": 1037
+    "Total Leads": 1065
   }
 };
