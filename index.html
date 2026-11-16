@@ -511,7 +511,8 @@ function render(club, view){
   const signed = Number(c["Signed Agreements"]) || 0;
 const canceledEntered = has(c["Canceled"]); // blank = not entered yet (counts as 0 for Active Members)
 const canceled = Number(c["Canceled"]) || 0;
-const active = Math.max(0, signed - canceled);
+const activeEntered = has(c["Active Members"]); // typed in directly, not calculated
+const active = Number(c["Active Members"]) || 0;
   // tier data: the typed tier total, plus the 12M / 3M term numbers if you entered them
   const tierInfo = name => {
     const v12 = c["Signed " + name + " 12M"], v3 = c["Signed " + name + " 3M"];
@@ -530,7 +531,7 @@ const active = Math.max(0, signed - canceled);
   const start = isMonth ? null : parseDate(c["Campaign Start"], false);
 
   // ---- Hero ----
-  $("fmCount").textContent = entered ? fmtNum(active) : "—";
+$("fmCount").textContent = activeEntered ? fmtNum(active) : "—";
   $("fmGoal").textContent = ""; // goal is measured on Signed Agreements, shown in Overall Progress below
   $("bignumLabel").textContent = isMonth ? "Active Members in " + mLabel : "Active Members";
 $("statSigned").textContent = entered ? fmtNum(signed) : "—";
@@ -689,7 +690,7 @@ $("ldMetaMtdSub").textContent = mLabel;
 function renderTabCounts(){
   CLUBS.forEach(cl => {
     const cfg = clubCfg(cl.key);
-const v = Math.max(0, (Number(cfg["Signed Agreements"]) || 0) - (Number(cfg["Canceled"]) || 0));
+const v = Number(cfg["Active Members"]) || 0;
     $("tabCount-" + cl.key).textContent = fmtNum(v) + " active";
   });
   $("monthBtnLabel").textContent = monthLabel();
