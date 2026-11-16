@@ -99,6 +99,9 @@ const STATS = {
     "Signed Neighborhood": 23,
     "Deposit Signed Count": 0,
     "Reserved Members": 0,
-    "Total Leads": 1065
+    "Total Leads": 1065,
+    "MTD Leads": "",
+    "Meta Leads": "",
+    "Meta MTD Leads": ""
   }
 };
