@@ -67,8 +67,8 @@ const STATS = {
     "Reserved Members": 725,
 "Total Leads": 4152,
 "MTD Leads": "429",
-"Meta Leads": "1595",
-"Meta MTD Leads": "193",
+"Meta Leads": "1607",
+"Meta MTD Leads": "208",
 
     // ---- Current month only (Month Label above). Fill these in. ----
     "Month": {
@@ -105,9 +105,9 @@ const STATS = {
     "Signed Neighborhood": 25,
     "Deposit Signed Count": 0,
     "Reserved Members": 0,
-    "Total Leads": 11148,
+    "Total Leads": 1148,
     "MTD Leads": "349",
-    "Meta Leads": "845",
-    "Meta MTD Leads": "167"
+    "Meta Leads": "864",
+    "Meta MTD Leads": "186"
   }
 };
