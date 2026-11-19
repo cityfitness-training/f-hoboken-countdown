@@ -42,7 +42,7 @@
 // IMPORTANT: never put commas inside numbers (write 1496, not 1,496).
 // ============================================================
 const STATS = {
-  "Last Updated": "November 16, 8:30AM",
+  "Last Updated": "November 19, 8:00AM",
   "Month Label": "November",
 
   "Maxwell": {
@@ -51,21 +51,21 @@ const STATS = {
     "Campaign Start": "2026-07-06",
     "Status Label": "Presale Open",
 
-"Signed Agreements": 1642,
-"Active Members": 1600,
+"Signed Agreements": 1656,
+"Active Members": 1614,
 "Canceled": 42,
-    "Signed Performance+": 568,
-    "Signed Studio+": 555,
-    "Signed Neighborhood": 477,
-    "Signed Performance+ 12M": "549",
-    "Signed Performance+ 3M": "19",
-    "Signed Studio+ 12M": "539",
+    "Signed Performance+": 574,
+    "Signed Studio+": 557,
+    "Signed Neighborhood": 483,
+    "Signed Performance+ 12M": "554",
+    "Signed Performance+ 3M": "20",
+    "Signed Studio+ 12M": "541",
     "Signed Studio+ 3M": "16",
-    "Signed Neighborhood 12M": "452",
+    "Signed Neighborhood 12M": "458",
     "Signed Neighborhood 3M": "25",
     "Deposit Signed Count": 507,
     "Reserved Members": 725,
-"Total Leads": 4091,
+"Total Leads": 4152,
 "MTD Leads": "429",
 "Meta Leads": "1595",
 "Meta MTD Leads": "193",
@@ -73,8 +73,8 @@ const STATS = {
     // ---- Current month only (Month Label above). Fill these in. ----
     "Month": {
       "Goal": 400,
-"Signed Agreements": "86",
-"Active Members": "84",
+"Signed Agreements": "100",
+"Active Members": "98",
 "Canceled": "2",
       "Signed Performance+": "25",
       "Signed Studio+": "25",
@@ -97,16 +97,16 @@ const STATS = {
     "Campaign Start": "2026-10-18",
     "Status Label": "Presale Open",
 
-"Signed Agreements": 105,
-"Active Members": 103,
+"Signed Agreements": 130,
+"Active Members": 128,
 "Canceled": "2",
-    "Signed Performance+": 47,
-    "Signed Studio+": 33,
-    "Signed Neighborhood": 23,
+    "Signed Performance+": 52,
+    "Signed Studio+": 51,
+    "Signed Neighborhood": 25,
     "Deposit Signed Count": 0,
     "Reserved Members": 0,
-    "Total Leads": 1065,
-    "MTD Leads": "228",
+    "Total Leads": 11148,
+    "MTD Leads": "349",
     "Meta Leads": "845",
     "Meta MTD Leads": "167"
   }
