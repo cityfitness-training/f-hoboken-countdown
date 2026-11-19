@@ -76,18 +76,18 @@ const STATS = {
 "Signed Agreements": "100",
 "Active Members": "98",
 "Canceled": "2",
-      "Signed Performance+": "25",
-      "Signed Studio+": "25",
-      "Signed Neighborhood": "24",
-      "Signed Performance+ 12M": "20",
-      "Signed Performance+ 3M": "5",
-      "Signed Studio+ 12M": "22",
+      "Signed Performance+": "31",
+      "Signed Studio+": "28",
+      "Signed Neighborhood": "39",
+      "Signed Performance+ 12M": "25",
+      "Signed Performance+ 3M": "6",
+      "Signed Studio+ 12M": "25",
       "Signed Studio+ 3M": "3",
-      "Signed Neighborhood 12M": "24",
+      "Signed Neighborhood 12M": "29",
       "Signed Neighborhood 3M": "10",
       "Deposit Signed Count": "",
       "Reserved Members": "",
-      "Total Leads": "429"
+      "Total Leads": "492"
     }
   },
 
