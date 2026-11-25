@@ -42,7 +42,7 @@
 // IMPORTANT: never put commas inside numbers (write 1496, not 1,496).
 // ============================================================
 const STATS = {
-  "Last Updated": "November 19, 8:00AM",
+  "Last Updated": "November 25, 9:00AM",
   "Month Label": "November",
 
   "Maxwell": {
@@ -52,42 +52,42 @@ const STATS = {
     "Status Label": "Presale Open",
 
 "Signed Agreements": 1656,
-"Active Members": 1614,
+"Active Members": 1638,
 "Canceled": 42,
-    "Signed Performance+": 574,
-    "Signed Studio+": 557,
-    "Signed Neighborhood": 483,
-    "Signed Performance+ 12M": "554",
-    "Signed Performance+ 3M": "20",
-    "Signed Studio+ 12M": "541",
-    "Signed Studio+ 3M": "16",
-    "Signed Neighborhood 12M": "458",
+    "Signed Performance+": 583,
+    "Signed Studio+": 563,
+    "Signed Neighborhood": 492,
+    "Signed Performance+ 12M": "562",
+    "Signed Performance+ 3M": "21",
+    "Signed Studio+ 12M": "546",
+    "Signed Studio+ 3M": "17",
+    "Signed Neighborhood 12M": "467",
     "Signed Neighborhood 3M": "25",
     "Deposit Signed Count": 507,
     "Reserved Members": 725,
-"Total Leads": 4152,
-"MTD Leads": "429",
+"Total Leads": 4262,
+"MTD Leads": "572",
 "Meta Leads": "1607",
 "Meta MTD Leads": "208",
 
     // ---- Current month only (Month Label above). Fill these in. ----
     "Month": {
       "Goal": 400,
-"Signed Agreements": "100",
-"Active Members": "98",
+"Signed Agreements": "124",
+"Active Members": "122",
 "Canceled": "2",
-      "Signed Performance+": "31",
-      "Signed Studio+": "28",
+      "Signed Performance+": "41",
+      "Signed Studio+": "34",
       "Signed Neighborhood": "39",
-      "Signed Performance+ 12M": "25",
-      "Signed Performance+ 3M": "6",
-      "Signed Studio+ 12M": "25",
-      "Signed Studio+ 3M": "3",
-      "Signed Neighborhood 12M": "29",
+      "Signed Performance+ 12M": "34",
+      "Signed Performance+ 3M": "7",
+      "Signed Studio+ 12M": "30",
+      "Signed Studio+ 3M": "4",
+      "Signed Neighborhood 12M": "39",
       "Signed Neighborhood 3M": "10",
       "Deposit Signed Count": "",
       "Reserved Members": "",
-      "Total Leads": "492"
+      "Total Leads": "572"
     }
   },
 
@@ -98,11 +98,11 @@ const STATS = {
     "Status Label": "Presale Open",
 
 "Signed Agreements": 130,
-"Active Members": 128,
+"Active Members": 143,
 "Canceled": "2",
-    "Signed Performance+": 52,
-    "Signed Studio+": 51,
-    "Signed Neighborhood": 25,
+    "Signed Performance+": 58,
+    "Signed Studio+": 58,
+    "Signed Neighborhood": 27,
     "Deposit Signed Count": 0,
     "Reserved Members": 0,
     "Total Leads": 1148,
